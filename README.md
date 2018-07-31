@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/Lulote/TrabajoTarjeta2018.svg?branch=master)](https://travis-ci.org/Lulote/TrabajoTarjeta2018)
+
+
 # Trabajo Tarjeta: Versión 2018
 
 El siguiente trabajo es un enunciado iterativo. Todas las semanas nuevos
