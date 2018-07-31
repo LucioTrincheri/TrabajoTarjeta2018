@@ -8,5 +8,6 @@ class ColectivoTest extends TestCase {
 
     public function testAlgoUtil() {
 //
+        //
     }
 }
