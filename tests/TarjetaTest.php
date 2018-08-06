@@ -36,6 +36,5 @@ class TarjetaTest extends TestCase {
 		$tarjeta->recargar(20);
 		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
-
-
+	}
 }
