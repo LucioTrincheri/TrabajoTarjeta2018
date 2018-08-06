@@ -34,4 +34,7 @@ class Tarjeta implements TarjetaInterface {
       return $this->saldo;
     }
 
+	public function abonarPasaje(){
+		$this->saldo -= 14.80;
+	}
 }

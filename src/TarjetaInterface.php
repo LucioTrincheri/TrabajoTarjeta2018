@@ -22,4 +22,5 @@ interface TarjetaInterface {
      */
     public function obtenerSaldo();
 
+	public function cobrarPasaje();
 }
