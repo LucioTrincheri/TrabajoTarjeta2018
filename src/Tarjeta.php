@@ -31,7 +31,7 @@ class Tarjeta implements TarjetaInterface {
      * @return float
      */
     public function obtenerSaldo() {
-      return $this->saldo;
+		return $this->saldo;
     }
 
 	public function abonarPasaje(){

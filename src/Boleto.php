@@ -5,13 +5,13 @@ namespace TrabajoTarjeta;
 class Boleto implements BoletoInterface {
 
     protected $valor;
-
     protected $colectivo;
+	protected $tarjeta;
 
     public function __construct($valor, $colectivo, $tarjeta) {
         $this->valor = $valor;
-	$this->colectivo = $colectivo;
-	$this->tarjeta = $tarjeta;
+		$this->colectivo = $colectivo;
+		$this->tarjeta = $tarjeta;
     }
 
     /**

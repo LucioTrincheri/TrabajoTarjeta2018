@@ -28,4 +28,14 @@ class TarjetaTest extends TestCase {
       $this->assertFalse($tarjeta->recargar(15));
       $this->assertEquals($tarjeta->obtenerSaldo(), 0);
   }
+	 /**
+     * Comprueba que el abono del pasaje es satisfactorio.
+     */
+	public function testAbonoTarjeta() {
+		$tarjeta = new Tarjeta;
+		$tarjeta->recargar(20);
+		$tarjeta->abonarPasaje();
+		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
+
+
 }

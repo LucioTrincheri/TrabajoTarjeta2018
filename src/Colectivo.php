@@ -5,9 +5,7 @@ namespace TrabajoTarjeta;
 class Colectivo implements ColectivoInterface {
 
     protected $linea;
-
     protected $empresa;
-
 	protected $numero;
 
     public function __construct($empresa, $linea, $numero) {
@@ -29,8 +27,8 @@ class Colectivo implements ColectivoInterface {
 	}
 
 	public function pagarCon(TarjetaInterface $tarjeta){
-		if($tarjeta->obtenerSaldo($tarjeta) >= 14.80){
-			$tarjeta->abonarPasaje($tarjeta);
+		if($tarjeta->obtenerSaldo() >= 14.80){
+			$tarjeta->abonarPasaje();
 			
 			$boleto = new Boleto(14.80, $this, $tarjeta);
 			return $boleto;
