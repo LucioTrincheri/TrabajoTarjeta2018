@@ -11,20 +11,20 @@ class ColectivoTest extends TestCase {
 		$linea = "666 RapalaProFishing";
 		$unidad = 420;
 		$colectivo = new Colectivo($empresa, $linea, $unidad);
-        $this->assertEquals($colectivo->empresa , $empresa);
+        $this->assertEquals($colectivo->empresa() , "string");
     }
     public function testLineaValida() {
 		$empresa = "AmericanAirlines";
 		$linea = "666 RapalaProFishing";
 		$unidad = 420;
 		$colectivo = new Colectivo($empresa, $linea, $unidad);
-        $this->assertEquals($colectivo->linea , $linea);
+        $this->assertEquals($colectivo->linea() , $linea);
     }
     public function testNumeroValida() {
 		$empresa = "AmericanAirlines";
 		$linea = "666 RapalaProFishing";
 		$unidad = 420;
 		$colectivo = new Colectivo($empresa, $linea, $unidad);
-        $this->assertEquals($colectivo->numero , $unidad);
+        $this->assertEquals($colectivo->numero() , $unidad);
     }
 }
