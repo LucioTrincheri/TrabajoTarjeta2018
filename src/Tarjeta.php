@@ -19,9 +19,9 @@ class Tarjeta implements TarjetaInterface {
 
         $this->saldo += $monto;
 
-	return 0;
+	return True;
 	} else {
-	return 1;
+	return False;
 	}
     }
 
