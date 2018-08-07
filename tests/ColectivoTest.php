@@ -51,7 +51,7 @@ class ColectivoTest extends TestCase {
 		$colectivo = new Colectivo($empresa, $linea, $unidad);
 		$tarjeta = new Tarjeta();
 		$tarjeta->recargar(20);
-		$this->assertInstanceOf(BoletoInterface, $colectivo->pagarCon($tarjeta));
+		$this->assertInstanceOf(Boleto::class, ($colectivo->pagarCon($tarjeta)));
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
 	}
 	/**
