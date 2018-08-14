@@ -63,6 +63,10 @@ class Tarjeta implements TarjetaInterface {
 	public function abonarPasaje(){
 		$this->saldo -= $this->valorPasaje;
 	}
+
+	public function valorDelPasaje(){
+		return $this->valorPasaje;
+	}
 }
 
 class MedioBoleto extends Tarjeta {
