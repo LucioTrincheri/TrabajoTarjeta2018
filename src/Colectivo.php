@@ -32,6 +32,11 @@ class Colectivo implements ColectivoInterface {
 			
 			$boleto = new Boleto(14.80, $this, $tarjeta);
 			return $boleto;
+		} else if($tarjeta->obtenerPlus() > 0){
+			$tarjeta->abonarPlus();
+			
+			$boleto = new Boleto(14.80, $this, $tarjeta);
+			return $boleto;
 		} else {
 			return False;
 		}

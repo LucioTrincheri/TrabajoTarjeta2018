@@ -52,4 +52,16 @@ class TarjetaTest extends TestCase {
 		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
 	}
+
+	public function testRecargaPlus() {
+		$tarjeta = new Tarjeta;
+		$tarjeta->recargar(10);
+		$tarjeta->abonarPlus();
+		$tarjeta->abonarPlus();
+		$tarjeta->recargar(30);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 10.4);
+		$tarjeta->abonarPlus();
+		$tarjeta->recargar(10);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 5.6);
+	}
 }
