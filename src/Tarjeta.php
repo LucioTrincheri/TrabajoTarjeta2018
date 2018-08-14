@@ -19,7 +19,7 @@ class Tarjeta implements TarjetaInterface {
 	}
 
         $this->saldo += $monto;
-		$this->plus = 2;
+	$this->plus = 2;
 	return True;
 	} else {
 	return False;
@@ -36,7 +36,7 @@ class Tarjeta implements TarjetaInterface {
     }
 
 	public function obtenerPlus() {
-		return $this->saldo;
+		return $this->plus;
     }
 
 	public function abonarPlus() {
