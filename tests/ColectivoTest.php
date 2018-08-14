@@ -81,6 +81,8 @@ class ColectivoTest extends TestCase {
 		$unidad = 420;
 		$colectivo = new Colectivo($empresa, $linea, $unidad);
 		$tarjeta = new Tarjeta();
+		$colectivo->pagarCon($tarjeta); //Elimino los plus iniciales
+		$colectivo->pagarCon($tarjeta);
 		$this->assertFalse($colectivo->pagarCon($tarjeta));
 	}
 }
