@@ -4,8 +4,9 @@ namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
 
-    protected $saldo;
+    protected $saldo=0;
 	protected $plus=2;
+	protected $valorPasaje = 14.8;
 
     public function recargar($monto) {
       if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
@@ -21,17 +22,17 @@ class Tarjeta implements TarjetaInterface {
         $this->saldo += $monto;
 	
 	if($this->plus == 1){
-		if($this->saldo >= 14.80){
-			$this->saldo -= 14.80;
+		if($this->saldo >= $this->valorPasaje){
+			$this->saldo -= $this->valorPasaje;
 			$this->plus = 2;
 		}
 	}
 	if($this->plus == 0){
-		if($this->saldo >= 2*14.80){
-			$this->saldo -= 2*14.80;
+		if($this->saldo >= 2*$this->valorPasaje){
+			$this->saldo -= 2*$this->valorPasaje;
 			$this->plus = 2;
-		}else if($this->saldo >= 14.80){
-			$this->saldo -= 14.80;
+		}else if($this->saldo >= $this->valorPasaje){
+			$this->saldo -= $this->valorPasaje;
 			$this->plus = 1;
 		}
 	}
@@ -60,6 +61,14 @@ class Tarjeta implements TarjetaInterface {
     }
 
 	public function abonarPasaje(){
-		$this->saldo -= 14.80;
+		$this->saldo -= $this->valorPasaje;
 	}
+}
+
+class MedioBoleto extends Tarjeta {
+	protected $valorPasaje = 7.4;
+}
+
+class FranquiciaCompleta extends Tarjeta {
+	protected $valorPasaje = 0;
 }
