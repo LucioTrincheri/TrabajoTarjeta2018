@@ -30,12 +30,12 @@ class Colectivo implements ColectivoInterface {
 		if($tarjeta->obtenerSaldo() >= $tarjeta->valorDelPasaje()){
 			$tarjeta->abonarPasaje();
 			
-			$boleto = new Boleto($tarjeta->valorPasaje, $this, $tarjeta);
+			$boleto = new Boleto($tarjeta->valorDelPasaje(), $this, $tarjeta);
 			return $boleto;
 		} else if($tarjeta->obtenerPlus() > 0){
 			$tarjeta->abonarPlus();
 			
-			$boleto = new Boleto($tarjeta->valorPasaje, $this, $tarjeta);
+			$boleto = new Boleto($tarjeta->valorDelPasaje(), $this, $tarjeta);
 			return $boleto;
 		} else {
 			return False;
