@@ -71,22 +71,6 @@ class ColectivoTest extends TestCase {
 		$this->assertFalse($colectivo->pagarCon($tarjeta));
 	}
 
-	public function testPagoValidoPlus() {
-		$empresa = "AmericanAirlines";
-		$linea = "666 RapalaProFishing";
-		$unidad = 420;
-		$colectivo = new Colectivo($empresa, $linea, $unidad);
-		$tarjeta = new Tarjeta();
-		$tarjeta->recargar(10);
-		$this->assertInstanceOf(Boleto::class, ($colectivo->pagarCon($tarjeta)));
-		$this->assertEquals($tarjeta->obtenerSaldo(), 10);
-		$this->assertEquals($tarjeta->obtenerPlus(), 1);
-		$this->assertInstanceOf(Boleto::class, ($colectivo->pagarCon($tarjeta)));
-		$this->assertEquals($tarjeta->obtenerSaldo(), 10);
-		$this->assertEquals($tarjeta->obtenerPlus(), 0);
-		$this->assertFalse($colectivo->pagarCon($tarjeta));
-	}
-
 	/**
 	* Comprueba que el resultado de pagarCon sea False al no tener el saldo suficiente, sin
 	* retirar el valor del pasaje.
