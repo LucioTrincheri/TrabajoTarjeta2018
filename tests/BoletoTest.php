@@ -16,19 +16,4 @@ class BoletoTest extends TestCase {
 
         $this->assertEquals($boleto->obtenerValor(), $valor);
     }
-
-	public function testViajeSimple() {
-		$empresa = "AmericanAirlines";
-		$linea = "666 RapalaProFishing";
-		$unidad = 420;
-		$colectivo = new Colectivo($empresa, $linea, $unidad);
-
-		$tarjeta = new Tarjeta;
-		$tarjeta->recargar(20);
-
-		$valor = 14.80;
-        $boleto = new Boleto($valor, $colectivo, $tarjeta);
-
-		
-	}
 }
