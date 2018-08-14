@@ -22,6 +22,10 @@ interface TarjetaInterface {
      */
     public function obtenerSaldo();
 
+	public function obtenerPlus();
+
+	public function abonarPlus();
+
 	/**
 	* Retira el valor del pasaje ($14.8) de la tarjeta.
 	*/
