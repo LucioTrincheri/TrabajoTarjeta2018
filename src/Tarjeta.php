@@ -69,7 +69,7 @@ class Tarjeta implements TarjetaInterface {
 		{
 			$this->saldo -= $this->valorPasaje;
 			return True;
-		}else if($this->plus > 2){
+		}else if($this->plus > 0){
 			$this->plus -= 1;
 			return True;
 		}else{
