@@ -64,16 +64,14 @@ class Tarjeta implements TarjetaInterface {
 		return $this->plus;
     }
 
-	public function abonarPasaje(){
+	public function abonarPasaje($colectivo){
 		if($this->saldo >= $this->valorPasaje)
 		{
 			$this->saldo -= $this->valorPasaje;
-			$boleto = new Boleto($tarjeta->valorDelPasaje(), $this, $tarjeta);
-			return $boleto;
+			return True;
 		}else if($this->plus > 2){
 			$this->plus -= 1;
-			$boleto = new Boleto($tarjeta->valorDelPasaje(), $this, $tarjeta);
-			return $boleto;
+			return True;
 		}else{
 			return False;
 		}
