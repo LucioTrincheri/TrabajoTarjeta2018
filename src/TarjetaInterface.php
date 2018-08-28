@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 interface TarjetaInterface {
 
-	protected function recPlus();
+	public function recPlus();
     /**
      * Recarga una tarjeta con un cierto valor de dinero.
      *

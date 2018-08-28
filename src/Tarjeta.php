@@ -8,7 +8,7 @@ class Tarjeta implements TarjetaInterface {
 	protected $plus=2;
 	protected $valorPasaje = 14.8;
 	
-	protected function recPlus() {
+	public function recPlus() {
 		if($this->plus == 1)
 		{
 			if($this->saldo >= $this->valorPasaje)
