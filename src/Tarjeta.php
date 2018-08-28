@@ -64,7 +64,7 @@ class Tarjeta implements TarjetaInterface {
 		return $this->plus;
     }
 
-	public function abonarPasaje($colectivo){
+	public function abonarPasaje(){
 		if($this->saldo >= $this->valorPasaje)
 		{
 			$this->saldo -= $this->valorPasaje;
