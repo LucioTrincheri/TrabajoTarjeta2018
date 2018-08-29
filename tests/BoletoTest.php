@@ -18,10 +18,7 @@ class BoletoTest extends TestCase {
     }
 
 	public function testViajeSimple() {
-		$empresa = "AmericanAirlines";
-		$linea = "666 RapalaProFishing";
-		$unidad = 420;
-		$colectivo = new Colectivo($empresa, $linea, $unidad);
+		$colectivo = new Colectivo(NULL, NULL, NULL);
 
 		$tarjeta = new Tarjeta;
 		$tarjeta->recargar(20);

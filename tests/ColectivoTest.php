@@ -45,30 +45,22 @@ class ColectivoTest extends TestCase {
 	* el valor del pasaje.
 	*/
 	public function testPagoValido() {
-		$empresa = "AmericanAirlines";
-		$linea = "666 RapalaProFishing";
-		$unidad = 420;
-		$colectivo = new Colectivo($empresa, $linea, $unidad);
 		$tarjeta = new Tarjeta();
 		$tarjeta->recargar(20);
-		$this->assertInstanceOf(Boleto::class, ($colectivo->pagarCon($tarjeta)));
+		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
 	}
 
 	public function testPagoValidoPlus() {
-		$empresa = "AmericanAirlines";
-		$linea = "666 RapalaProFishing";
-		$unidad = 420;
-		$colectivo = new Colectivo($empresa, $linea, $unidad);
 		$tarjeta = new Tarjeta();
 		$tarjeta->recargar(10);
-		$this->assertInstanceOf(Boleto::class, ($colectivo->pagarCon($tarjeta)));
+		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 10);
 		$this->assertEquals($tarjeta->obtenerPlus(), 1);
-		$this->assertInstanceOf(Boleto::class, ($colectivo->pagarCon($tarjeta)));
+		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 10);
 		$this->assertEquals($tarjeta->obtenerPlus(), 0);
-		$this->assertFalse($colectivo->pagarCon($tarjeta));
+		$this->assertFalse($tarjeta->abonarPasaje());
 	}
 
 	/**
@@ -76,13 +68,9 @@ class ColectivoTest extends TestCase {
 	* retirar el valor del pasaje.
 	*/
 	public function testPagoInvalido() {
-		$empresa = "AmericanAirlines";
-		$linea = "666 RapalaProFishing";
-		$unidad = 420;
-		$colectivo = new Colectivo($empresa, $linea, $unidad);
 		$tarjeta = new Tarjeta();
-		$colectivo->pagarCon($tarjeta); //Elimino los plus iniciales
-		$colectivo->pagarCon($tarjeta);
-		$this->assertFalse($colectivo->pagarCon($tarjeta));
+		$tarjeta->abonarPasaje(); //Elimino los plus iniciales
+		$tarjeta->abonarPasaje();
+		$this->assertFalse($tarjeta->abonarPasaje());
 	}
 }
