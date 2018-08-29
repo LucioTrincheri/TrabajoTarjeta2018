@@ -50,10 +50,6 @@ class Tarjeta implements TarjetaInterface {
 
 	return True;
 	}
-	else
-	{
-	return False;
-	}
     }
 
     public function obtenerSaldo() {
@@ -72,8 +68,6 @@ class Tarjeta implements TarjetaInterface {
 		}else if($this->plus > 0){
 			$this->plus -= 1;
 			return True;
-		}else{
-			return False;
 		}
 	}
 
