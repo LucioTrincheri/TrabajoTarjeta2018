@@ -49,6 +49,8 @@ class Tarjeta implements TarjetaInterface {
 	$this->recPlus();
 
 	return True;
+	}else{
+	return False;
 	}
     }
 
@@ -68,18 +70,12 @@ class Tarjeta implements TarjetaInterface {
 		}else if($this->plus > 0){
 			$this->plus -= 1;
 			return True;
+		}else{
+			return False;
 		}
 	}
 
 	public function valorDelPasaje(){
 		return $this->valorPasaje;
 	}
-}
-
-class MedioBoleto extends Tarjeta {
-	protected $valorPasaje = 7.4; //no solo pasar a archivo propio sino hacerlo en base al valor del boleto original
-}
-
-class FranquiciaCompleta extends Tarjeta {
-	protected $valorPasaje = 0;
 }

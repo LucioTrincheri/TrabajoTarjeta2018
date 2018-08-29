@@ -32,6 +32,9 @@ class Colectivo implements ColectivoInterface {
 			$boleto = new Boleto($tarjeta->valorDelPasaje(), $this, $tarjeta);
 			return $boleto;
 		}
+		else{
+			return False;
+		}
 	}
 
 }
