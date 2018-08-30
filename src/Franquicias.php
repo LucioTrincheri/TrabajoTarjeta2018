@@ -2,8 +2,7 @@
 
 namespace TrabajoTarjeta;
 
-class FranquiciaCompleta extends Tarjeta
-{
+class FranquiciaCompleta extends Tarjeta{
 	protected $valorPasaje = 0;
 	protected $franqRestantes = 2;
 	
