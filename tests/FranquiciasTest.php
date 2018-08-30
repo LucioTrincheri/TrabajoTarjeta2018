@@ -63,13 +63,16 @@ class FranquiciaTest extends TestCase {
 	
 	public function testTiempoEntreUniv(){
 		$tiempoFalso = new TiempoFalso;
-		$tarjeta = new MedioBoleto($tiempoFalso);
+		$tarjeta = new FranquiciaCompleta($tiempoFalso);
 		$tarjeta->recargar(50);
 		$this->assertTrue($tarjeta->abonarPasaje());
+		$tiempoFalso -> avanzar(1);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 50);
 		$this->assertTrue($tarjeta->abonarPasaje());
+		$tiempoFalso -> avanzar(1);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 50);
 		$this->assertTrue($tarjeta->abonarPasaje());
+		$tiempoFalso -> avanzar(1);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 35.2);
 		$tiempoFalso -> avanzar(100000);
 		$this->assertTrue($tarjeta->abonarPasaje());
