@@ -20,7 +20,7 @@ class FranquiciaCompleta extends Tarjeta
 			else
 			{
 				$hora = $this->tiempo->time();
-				if($hora - $this->horaViaje >= 86400)
+				if($hora - $this->horaViaje >= 86400 || $hora == 0)
 				{
 					$this->franqRestantes = 2;
 					$this->franqRestantes -= 1;
