@@ -23,7 +23,6 @@ class FranquiciaCompleta extends Tarjeta
 				{
 					$this->franqRestantes = 2;
 					$this->franqRestantes -= 1;
-					$this->saldo -= $this->valorPasaje;
 					$this->horaViaje = $this->tiempo->time();
 					return True;
 				}
