@@ -47,4 +47,31 @@ class FranquiciaTest extends TestCase {
 		$this->assertEquals($tarjeta->obtenerPlus(),2); //Pasaje abonado correctamente y cant. plus sigue siendo 2
 	}
 
+	public function testTiempoEntreMedios(){
+		$tiempoFalso = new TiempoFalso;
+		$tarjeta = new MedioBoleto($tiempoFalso);
+		$tarjeta->recargar(50);
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertEquals($tarjeta->obtenerSaldo(), 42.6);
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertEquals($tarjeta->obtenerSaldo(), 27.8);
+		$tiempoFalso -> avanzar(400);
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertEquals($tarjeta->obtenerSaldo(), 20.4);
+	}
+	
+	public function testTiempoEntreUniv(){
+		$tiempoFalso = new TiempoFalso;
+		$tarjeta = new MedioBoleto($tiempoFalso);
+		$tarjeta->recargar(50);
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertEquals($tarjeta->obtenerSaldo(), 50);
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertEquals($tarjeta->obtenerSaldo(), 35.2);
+		$tiempoFalso -> avanzar(10000);
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertEquals($tarjeta->obtenerSaldo(), 35.2);
+	}
+
 }
