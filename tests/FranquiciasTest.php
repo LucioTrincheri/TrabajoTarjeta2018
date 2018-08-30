@@ -16,23 +16,24 @@ class FranquiciaTest extends TestCase {
 
 	public function testPagoValidoPlusMedioBoleto() {
 		$tiempoReal = new Tiempo;
-		$tarjeta = new MedioBoleto($tiempoReal);
+		$tarjeta = new MedioBoleto($tiempoReal); //uso tiempo real porque no afecta esta prueba, pero tener en cuenta que al usar tiempo real no se puede simular el paso del tiempo lo que activa la resticcion del medio boleto
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerPlus(), 1);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerPlus(), 0);
-		$tarjeta->recargar(20); //para arreglar a futuro: en este punto se va a creer que hace poco se hizo un viaje medio boleto, por lo tanto no se cobrara el siguiente, cuando en realidad fue un viaje plus
+		$tarjeta->recargar(20);
 		$this->assertEquals($tarjeta->obtenerPlus(), 2);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
 	}
 
 	public function testValorPasajeMedioBoleto(){
-		$tiempoReal = new Tiempo;
-		$tarjeta = new MedioBoleto($tiempoReal);
+		$tiempoFalso = new TiempoFalso;
+		$tarjeta = new MedioBoleto($tiempoFalso);
 		$tarjeta2 = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(20);
 		$tarjeta2->recargar(20);
 		$this->assertTrue($tarjeta->abonarPasaje());
+		$tiempoFalso -> avanzar(400);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertTrue($tarjeta2->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta2->obtenerSaldo());
