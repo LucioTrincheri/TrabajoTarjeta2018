@@ -28,6 +28,7 @@ class FranquiciaTest extends TestCase {
 
 	public function testValorPasajeMedioBoleto(){
 		$tiempoFalso = new TiempoFalso;
+		$tiempoReal = new TiempoReal;
 		$tarjeta = new MedioBoleto($tiempoFalso);
 		$tarjeta2 = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(20);
