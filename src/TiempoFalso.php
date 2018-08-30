@@ -1,5 +1,7 @@
 <?php
 
+namespace TrabajoTarjeta;
+
 class TiempoFalso implements TiempoInterface
 {
 	protected $tiempo;

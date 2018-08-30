@@ -9,23 +9,23 @@ class MedioBoleto extends Tarjeta
 	public function abonarPasaje(){
 		if($this->saldo >= $this->valorPasaje)
 		{
-			$hora = time();
+			$hora = $this->tiempo->time();
 			if($hora - $this->horaViaje >= 300)
 			{
 				$this->saldo -= $this->valorPasaje;
-				$this->horaViaje = time();
+				$this->horaViaje = $this->tiempo->time();
 				return True;
 			}
 			
 			$this->saldo -= ($this->valorPasaje*2);
-			$this->horaViaje = time();
+			$this->horaViaje = $this->tiempo->time();
 			return True;
 			
 		}
 		else if($this->plus > 0)
 		{
 			$this->plus -= 1;
-			$this->horaViaje = time();
+			$this->horaViaje = $this->tiempo->time();
 			return True;
 		}
 		else

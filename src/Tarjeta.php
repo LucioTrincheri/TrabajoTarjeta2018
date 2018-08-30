@@ -9,7 +9,7 @@ class Tarjeta implements TarjetaInterface {
 	protected $valorPasaje = 14.8;
 	protected $horaViaje = 0;
 	
-	public function __construct($tiempo)
+	public function __construct(TiempoInterface $tiempo)
 	{
 		$this->tiempo = $tiempo;
 	}
@@ -72,11 +72,11 @@ class Tarjeta implements TarjetaInterface {
 		if($this->saldo >= $this->valorPasaje)
 		{
 			$this->saldo -= $this->valorPasaje;
-			$this->horaViaje = time();
+			$this->horaViaje = $this->tiempo->time();
 			return True;
 		}else if($this->plus > 0){
 			$this->plus -= 1;
-			$this->horaViaje = time();
+			$this->horaViaje = $this->tiempo->time();
 			return True;
 		}else{
 			return False;

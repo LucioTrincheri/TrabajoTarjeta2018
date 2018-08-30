@@ -14,31 +14,31 @@ class FranquiciaCompleta extends Tarjeta
 			{
 				$this->franqRestantes -= 1;
 				$this->saldo -= $this->valorPasaje;
-				$this->horaViaje = time();
+				$this->horaViaje = $this->tiempo->time();
 				return True;
 			}
 			else
 			{
-				$hora = time();
+				$hora = $this->tiempo->time();
 				if($hora - $this->horaViaje >= 86400)
 				{
 					$this->franqRestantes = 2;
 					$this->franqRestantes -= 1;
 					$this->saldo -= $this->valorPasaje;
-					$this->horaViaje = time();
+					$this->horaViaje = $this->tiempo->time();
 					return True;
 				}
 			}
 			
 			$this->saldo -= $this->valorPasaje+14.8;
-			$this->horaViaje = time();
+			$this->horaViaje = $this->tiempo->time();
 			return True;
 			
 		}
 		else if($this->plus > 0)
 		{
 			$this->plus -= 1;
-			$this->horaViaje = time();
+			$this->horaViaje = $this->tiempo->time();
 			return True;
 		}
 		else
