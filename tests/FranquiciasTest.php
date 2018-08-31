@@ -21,9 +21,9 @@ class FranquiciasTest extends TestCase {
 		$this->assertEquals($tarjeta->obtenerPlus(), 1);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerPlus(), 0);
-		$tarjeta->recargar(20);
+		$tarjeta->recargar(100);
 		$this->assertEquals($tarjeta->obtenerPlus(), 2);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 70.4);
 	}
 
 	public function testValorPasajeMedioBoleto(){
@@ -103,8 +103,8 @@ class FranquiciasTest extends TestCase {
 		$tarjetaM->recargar(100);
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
-		$this->assertEquals($tarjetaF->obtenerSaldo(), 59.6);
-		$this->assertEquals($tarjetaM->obtenerSaldo(), 67);
+		$this->assertEquals($tarjetaF->obtenerSaldo(), 55.6);
+		$this->assertEquals($tarjetaM->obtenerSaldo(), 63);
 		//chequeo que la hora en que se uso el plus no afecte al medio pero si a la f.completa
 	}
 }
