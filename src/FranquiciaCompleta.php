@@ -7,7 +7,7 @@ class FranquiciaCompleta extends Tarjeta{
 	protected $franqRestantes = 2;
 	
 	public function abonarPasaje(){
-		if($this->saldo >= $this->valorPasaje)
+		if($this->saldo >= $this->valorPasaje && $this->saldo > 0)
 		{
 			$hora = $this->tiempo->time();
 		
@@ -23,12 +23,11 @@ class FranquiciaCompleta extends Tarjeta{
 				$this->horaViaje = $this->tiempo->time();
 				return True;
 			}
-			else if($this->saldo != 0)
-			{
-				$this->saldo -= $this->valorPasaje+14.8;
-				$this->horaViaje = $this->tiempo->time();
-				return True;
-			}		
+
+		$this->saldo -= $this->valorPasaje+14.8;
+		$this->horaViaje = $this->tiempo->time();
+		return True;
+		
 		}
 		else if($this->plus > 0)
 		{
