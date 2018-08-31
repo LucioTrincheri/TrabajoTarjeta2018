@@ -85,6 +85,7 @@ class FranquiciasTest extends TestCase {
 		$tarjetaF = new FranquiciaCompleta($tiempoFalso);
 		$tarjetaM = new MedioBoleto($tiempoFalso);
 		//creo ambas tarjetas
+		$tarjetaF->recargar(10);
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
 		$tiempoFalso -> avanzar(1);
