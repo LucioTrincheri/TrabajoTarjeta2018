@@ -26,9 +26,9 @@ class Tarjeta implements TarjetaInterface {
 		
 		if($this->plus == 0)
 		{
-			if($this->saldo >= 25.6)
+			if($this->saldo >= 29.6)
 			{
-				$this->saldo -= 25.6;
+				$this->saldo -= 29.6;
 				$this->plus = 2;
 			}
 			else if($this->saldo >= 14.8)
