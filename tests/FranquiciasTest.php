@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 use PHPUnit\Framework\TestCase;
 
-class FranquiciaTest extends TestCase {
+class FranquiciasTest extends TestCase {
 
 	public function testPagoValidoMedioBoleto() {
 		$tiempoReal = new Tiempo;
@@ -63,7 +63,7 @@ class FranquiciaTest extends TestCase {
 	
 	public function testTiempoEntreUniv(){
 		$tiempoFalso = new TiempoFalso;
-		$tarjeta= new FranquiciaCompleta($tiempoFalso);
+		$tarjeta = new FranquiciaCompleta($tiempoFalso);
 		$tarjeta->recargar(50);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$tiempoFalso -> avanzar(1);
