@@ -17,23 +17,23 @@ class Tarjeta implements TarjetaInterface {
 	public function recPlus() {
 		if($this->plus == 1)
 		{
-			if($this->saldo >= $this->valorPasaje)
+			if($this->saldo >= 14.8)
 			{
-				$this->saldo -= $this->valorPasaje;
+				$this->saldo -= 14.8; //el valor del plus es siempre el valor total
 				$this->plus = 2;
 			}
 		}
 		
 		if($this->plus == 0)
 		{
-			if($this->saldo >= 2*$this->valorPasaje)
+			if($this->saldo >= 25.6)
 			{
-				$this->saldo -= 2*$this->valorPasaje;
+				$this->saldo -= 25.6;
 				$this->plus = 2;
 			}
-			else if($this->saldo >= $this->valorPasaje)
+			else if($this->saldo >= 14.8)
 			{
-				$this->saldo -= $this->valorPasaje;
+				$this->saldo -= 14.8;
 				$this->plus = 1;
 			}
 		}
