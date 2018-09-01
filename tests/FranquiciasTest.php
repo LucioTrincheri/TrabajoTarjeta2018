@@ -60,29 +60,23 @@ class FranquiciasTest extends TestCase {
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 20.4);
 	}
-
-
-/*
 	
 	public function testTiempoEntreUniv(){
 		$tiempoFalso = new TiempoFalso;
-		$tarjeta = new FranquiciaCompleta($tiempoFalso);
+		$tarjeta = new MedioBoletoUni($tiempoFalso);
 		$tarjeta->recargar(50);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$tiempoFalso -> avanzar(1);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 50);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 42.6);
+		$this->assertTrue($tarjeta->abonarPasaje());
+		$tiempoFalso -> avanzar(1000000);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 27.8);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$tiempoFalso -> avanzar(1);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 50);
-		$this->assertTrue($tarjeta->abonarPasaje());
-		$tiempoFalso -> avanzar(1);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 35.2);
-		$tiempoFalso -> avanzar(100000);
-		$this->assertTrue($tarjeta->abonarPasaje());
-		$this->assertEquals($tarjeta->obtenerSaldo(), 35.2);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 20.4);
 	}
 
-	
+	/*
 	public function testInteraccionPlusHorarios(){
 		$tiempoFalso = new TiempoFalso;
 		$tarjetaF = new FranquiciaCompleta($tiempoFalso);
