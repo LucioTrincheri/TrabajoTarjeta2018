@@ -5,29 +5,29 @@ namespace TrabajoTarjeta;
 class MedioBoleto extends Tarjeta
 {
 	protected $valorPasaje = 7.4;
-	protected $new = True;
+	protected $nueva = True;
 
 	public function abonarPasaje(){
 		if($this->saldo >= $this->valorPasaje)
 		{
 			$hora = $this->tiempo->time();
-			if($hora - $this->horaViaje >= 300 || $new == True;)
+			if($hora - $this->horaViaje >= 300 || $nueva == True;)
 			{
 				$this->saldo -= $this->valorPasaje;
 				$this->horaViaje = $this->tiempo->time();
-				$this->new = False;
+				$this->nueva = False;
 				return True;
 			}
 			
 			$this->saldo -= ($this->valorPasaje*2);
-			$this->new = False;
+			$this->nueva = False;
 			return True;
 			
 		}
 		else if($this->plus > 0)
 		{
 			$this->plus -= 1;
-			$this->new = False;
+			$this->nueva = False;
 			return True;
 		}
 		else
