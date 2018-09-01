@@ -16,12 +16,14 @@ class MedioBoletoUni extends Tarjeta
 				if($this->mediosRestantes > 0)
 				{
 					$this->mediosRestantes -= 1;
+					$this->saldo -= $this->valorPasaje;
 					$this->horaViaje = $this->tiempo->time();
 					return True;
 				}
 				else if($hora - $this->horaViaje >= 86400)
 				{
 					$this->mediosRestantes = 1;
+					$this->saldo -= $this->valorPasaje;
 					$this->horaViaje = $this->tiempo->time();
 					return True;
 				}
