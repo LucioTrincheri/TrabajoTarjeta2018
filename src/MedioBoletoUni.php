@@ -11,7 +11,7 @@ class MedioBoletoUni extends Tarjeta
 		if($this->saldo >= $this->valorPasaje)
 		{
 			$hora = $this->tiempo->time();
-			if($hora - $this->horaViaje >= 300 || $hora == 0)
+			if($hora - $this->horaViaje >= 300 || $this->horaViaje == 0)
 			{
 				if($this->mediosRestantes > 0)
 				{
