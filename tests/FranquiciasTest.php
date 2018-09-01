@@ -53,7 +53,6 @@ class FranquiciasTest extends TestCase {
 		$tarjeta->recargar(50);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 42.6);
-		$tiempoFalso -> avanzar(1); //hago pasar un segundo para evitar la condicion del tiempo 0, todavia no tengo otra manera de resolver ese problema
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 27.8);
 		$tiempoFalso -> avanzar(400);
@@ -66,13 +65,11 @@ class FranquiciasTest extends TestCase {
 		$tarjeta = new MedioBoletoUni($tiempoFalso);
 		$tarjeta->recargar(50);
 		$this->assertTrue($tarjeta->abonarPasaje());
-		$tiempoFalso -> avanzar(1);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 42.6);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$tiempoFalso -> avanzar(1000000);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 27.8);
 		$this->assertTrue($tarjeta->abonarPasaje());
-		$tiempoFalso -> avanzar(1);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 20.4);
 	}
 
@@ -83,10 +80,8 @@ class FranquiciasTest extends TestCase {
 		//creo ambas tarjetas
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
-		$tiempoFalso -> avanzar(1);
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
-		$tiempoFalso -> avanzar(1);
 		$this->assertEquals($tarjetaF->obtenerPlus(), 0);
 		$this->assertEquals($tarjetaM->obtenerPlus(), 0);
 		//gasto plus
