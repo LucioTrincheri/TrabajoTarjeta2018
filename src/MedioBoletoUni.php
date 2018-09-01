@@ -33,14 +33,12 @@ class MedioBoletoUni extends Tarjeta
 			}
 			
 			$this->saldo -= ($this->valorPasaje*2);
-			$this->nueva = False;
 			return True;
 			
 		}
 		else if($this->plus > 0)
 		{
 			$this->plus -= 1;
-			$this->nueva = False;
 			return True;
 		}
 		else
