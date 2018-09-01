@@ -11,7 +11,7 @@ class MedioBoleto extends Tarjeta
 		if($this->saldo >= $this->valorPasaje)
 		{
 			$hora = $this->tiempo->time();
-			if($hora - $this->horaViaje >= 300 || $nueva == True;)
+			if($hora - $this->horaViaje >= 300 || $this->nueva == True)
 			{
 				$this->saldo -= $this->valorPasaje;
 				$this->horaViaje = $this->tiempo->time();
