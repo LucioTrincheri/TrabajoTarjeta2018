@@ -76,33 +76,26 @@ class FranquiciasTest extends TestCase {
 		$this->assertEquals($tarjeta->obtenerSaldo(), 20.4);
 	}
 
-	/*
 	public function testInteraccionPlusHorarios(){
 		$tiempoFalso = new TiempoFalso;
-		$tarjetaF = new FranquiciaCompleta($tiempoFalso);
+		$tarjetaF = new MedioBoletoUni($tiempoFalso);
 		$tarjetaM = new MedioBoleto($tiempoFalso);
 		//creo ambas tarjetas
-		$tarjetaF->recargar(10);
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
 		$tiempoFalso -> avanzar(1);
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
-		$tiempoFalso -> avanzar(1);
-		$this->assertEquals($tarjetaF->obtenerPlus(), 2);
-		$this->assertEquals($tarjetaM->obtenerPlus(), 0);
-		$tarjetaF->abonarPasaje();
-		$tiempoFalso -> avanzar(1);
-		$tarjetaF->abonarPasaje();
 		$tiempoFalso -> avanzar(1);
 		$this->assertEquals($tarjetaF->obtenerPlus(), 0);
-		//chequeo que el orden de gasto sea: franquicia->plus->saldo
+		$this->assertEquals($tarjetaM->obtenerPlus(), 0);
+		//gasto plus
 		$tarjetaF->recargar(100);
 		$tarjetaM->recargar(100);
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
-		$this->assertEquals($tarjetaF->obtenerSaldo(), 55.6);
+		$this->assertEquals($tarjetaF->obtenerSaldo(), 63);
 		$this->assertEquals($tarjetaM->obtenerSaldo(), 63);
 		//chequeo que la hora en que se uso el plus no afecte al medio pero si a la f.completa
-	} */
+	}
 }
