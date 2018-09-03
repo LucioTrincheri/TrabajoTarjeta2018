@@ -45,14 +45,16 @@ class ColectivoTest extends TestCase {
 	* el valor del pasaje.
 	*/
 	public function testPagoValido() {
-		$tarjeta = new Tarjeta();
+		$tiempoReal = new Tiempo;
+		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(20);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
 	}
 
 	public function testPagoValidoPlus() {
-		$tarjeta = new Tarjeta();
+		$tiempoReal = new Tiempo;
+		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(10);
 		$this->assertTrue($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerSaldo(), 10);
@@ -68,7 +70,8 @@ class ColectivoTest extends TestCase {
 	* retirar el valor del pasaje.
 	*/
 	public function testPagoInvalido() {
-		$tarjeta = new Tarjeta();
+		$tiempoReal = new Tiempo;
+		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->abonarPasaje(); //Elimino los plus iniciales
 		$tarjeta->abonarPasaje();
 		$this->assertFalse($tarjeta->abonarPasaje());

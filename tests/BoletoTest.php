@@ -19,8 +19,8 @@ class BoletoTest extends TestCase {
 
 	public function testViajeSimple() {
 		$colectivo = new Colectivo(NULL, NULL, NULL);
-
-		$tarjeta = new Tarjeta;
+		$tiempoReal = new Tiempo;
+		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(20);
 
 		$valor = 14.80;
