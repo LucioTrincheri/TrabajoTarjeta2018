@@ -59,13 +59,10 @@ class TarjetaTest extends TestCase {
 	public function testRecargaPlus() {
 		$tiempoReal = new Tiempo;
 		$tarjeta = new Tarjeta($tiempoReal);
-		$tarjeta->recargar(10);
 		$tarjeta->abonarPasaje();
 		$tarjeta->abonarPasaje();
-		$tarjeta->recargar(20);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 0.4);
+		$tarjeta->recargar(50);
 		$tarjeta->abonarPasaje();
-		$tarjeta->recargar(20);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 5.6);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 5.6); //Abono 2 plus + pasaje = 44.4
 	}
 }
