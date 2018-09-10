@@ -8,10 +8,15 @@ class Tarjeta implements TarjetaInterface {
 	protected $plus=2;
 	protected $valorPasaje = 14.8;
 	protected $horaViaje = 0;
+	protected $tipo = "Movi";
+	protected $ultViajePlus=0;
+	protected $ultimoAbono=0;
+	protected $ID=0;
 	
-	public function __construct(TiempoInterface $tiempo)
+	public function __construct(TiempoInterface $tiempo, $id=0)
 	{
 		$this->tiempo = $tiempo;
+		$this->ID = $id;
 	}
 	
 	public function recPlus() {
@@ -74,10 +79,12 @@ class Tarjeta implements TarjetaInterface {
 			$this->saldo -= ($this->valorPasaje * (1 + abs($this->plus - 2)));
 			$this->horaViaje = $this->tiempo->time();
 			$this->plus = 2;
+			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))));
 			return True;
 		}else if($this->plus > 0){
 			$this->plus -= 1;
 			$this->horaViaje = $this->tiempo->time();
+			$this->CalculoAbonoTotal(0);
 			return True;
 		}
 		return False;
@@ -85,5 +92,30 @@ class Tarjeta implements TarjetaInterface {
 
 	public function valorDelPasaje(){
 		return $this->valorPasaje;
+	}
+
+	public function tipoTarjeta(){
+		return $this->tipo;
+	}
+	
+	public function CalculoAbonoTotal($total){
+		if($total == 0){
+			$this->ultViajePlus=1;
+			return NULL;
+		}
+		$this->ultimoAbono = $total;
+		$this->ultViajePlus = ($total - $this->valorPasaje) / $this->valorPasaje;
+	}
+
+	public function ultAbono(){
+		return $this->ultimoAbono;
+	}
+
+	public function ultCantPlus(){
+		return $this->ultViajePlus;
+	}
+
+	public function getID(){
+		return $this->ID;
 	}
 }

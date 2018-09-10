@@ -6,6 +6,7 @@ class MedioBoleto extends Tarjeta
 {
 	protected $valorPasaje = 7.4;
 	protected $nueva = True;
+	protected $tipo = "Medio";
 
 	public function abonarPasaje(){
 		if($this->saldo >= ($this->valorPasaje * (1 + abs($this->plus - 2))))
