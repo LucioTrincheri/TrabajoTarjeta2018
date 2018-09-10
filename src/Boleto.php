@@ -28,12 +28,35 @@ class Boleto implements BoletoInterface {
 		$this->plusA = $tarjeta->ultCantPlus();
     }
 
-    public function obtenerValor() {
+    public function Fecha() {
         return $this->abono;
     }
 
-    public function obtenerColectivo() {
-	return $this->colectivo;
+    public function TipoTarjeta() {
+        return $this->tipoT;
     }
 
+    public function SaldoTarjeta() {
+        return $this->saldoT;
+    }
+
+    public function IDTarjeta() {
+        return $this->IDT;
+    }
+
+    public function LineaColectivo() {
+        return $this->lineaC;
+    }
+
+    public function Abono() {
+        return $this->abono;
+    }
+
+    public function PlusAbonados() {
+        return $this->plusA;
+    }
+
+    public function obtenerColectivo() {
+		return $this->colectivo;
+    }
 }
