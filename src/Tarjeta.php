@@ -100,6 +100,7 @@ class Tarjeta implements TarjetaInterface {
 	
 	public function CalculoAbonoTotal($total){
 		if($total == 0){
+			$this->ultimoAbono=0;
 			$this->ultViajePlus=1;
 			return NULL;
 		}
@@ -117,5 +118,9 @@ class Tarjeta implements TarjetaInterface {
 
 	public function getID(){
 		return $this->ID;
+	}
+
+	public function getHora(){
+		return $this->horaViaje;
 	}
 }
