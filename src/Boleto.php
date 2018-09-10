@@ -19,7 +19,7 @@ class Boleto implements BoletoInterface {
 		$this->colectivo = $colectivo;
 		$this->tarjeta = $tarjeta;
 
-		$this->fecha = date("d/m/Y H:i:s", $tarjeta->getHora());
+		$this->fecha = $tarjeta->getHora();
 		$this->tipoT = $tarjeta->tipoTarjeta();
 		$this->saldoT = $tarjeta->obtenerSaldo();
 		$this->IDT = $tarjeta->getID();
@@ -29,7 +29,7 @@ class Boleto implements BoletoInterface {
     }
 
     public function Fecha() {
-        return $this->abono;
+        return $this->fecha;
     }
 
     public function TipoTarjeta() {
