@@ -9,7 +9,7 @@ class MedioBoletoUni extends Tarjeta
 	protected $nueva = True;
 
 	public function abonarPasaje(){
-		if($this->saldo >= $this->valorPasaje)
+		if($this->saldo >= ($this->valorPasaje * (1 + abs($this->plus - 2))))
 		{
 			$hora = $this->tiempo->time();
 			if($hora - $this->horaViaje >= 300 || $this->nueva == True)
@@ -17,7 +17,7 @@ class MedioBoletoUni extends Tarjeta
 				if($this->mediosRestantes > 0)
 				{
 					$this->mediosRestantes -= 1;
-					$this->saldo -= $this->valorPasaje;
+					$this->saldo -= ($this->valorPasaje * (1 + abs($this->plus - 2)));
 					$this->horaViaje = $this->tiempo->time();
 					$this->nueva = False;
 					return True;
@@ -25,14 +25,14 @@ class MedioBoletoUni extends Tarjeta
 				else if($hora - $this->horaViaje >= 86400)
 				{
 					$this->mediosRestantes = 1;
-					$this->saldo -= $this->valorPasaje;
+					$this->saldo -= ($this->valorPasaje * (1 + abs($this->plus - 2)));
 					$this->horaViaje = $this->tiempo->time();
 					$this->nueva = False;
 					return True;
 				}
 			}
 			
-			$this->saldo -= ($this->valorPasaje*2);
+			$this->saldo -= ($this->valorPasaje * (2 + abs($this->plus - 2)));
 			return True;
 			
 		}
@@ -41,9 +41,6 @@ class MedioBoletoUni extends Tarjeta
 			$this->plus -= 1;
 			return True;
 		}
-		else
-		{
-			return False;
-		}
+		return False;
 	}
 }
