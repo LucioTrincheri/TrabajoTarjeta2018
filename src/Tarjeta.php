@@ -19,50 +19,22 @@ class Tarjeta implements TarjetaInterface {
 		$this->ID = $id;
 	}
 	
-	public function recPlus() {
-		if($this->plus == 1)
-		{
-			if($this->saldo >= 14.8)
-			{
-				$this->saldo -= 14.8; //el valor del plus es siempre el valor total
-				$this->plus = 2;
-			}
-		}
-		
-		if($this->plus == 0)
-		{
-			if($this->saldo >= 29.6)
-			{
-				$this->saldo -= 29.6;
-				$this->plus = 2;
-			}
-			else if($this->saldo >= 14.8)
-			{
-				$this->saldo -= 14.8;
-				$this->plus = 1;
-			}
-		}
-	}
 		
     public function recargar($monto) {
-      if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
+    	if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
 
-	if($monto == 510.15) {
-		$this->saldo += 81.93;
-	}
+			if($monto == 510.15) {
+				$this->saldo += 81.93;
+			}
 
-	if($monto == 962.59) {
-		$this->saldo += 221.58;
-	}
+			if($monto == 962.59) {
+				$this->saldo += 221.58;
+			}
 
-        $this->saldo += $monto;
-	
-	$this->recPlus();
-
-	return True;
-	}else{
-	return False;
-	}
+        	$this->saldo += $monto;
+			return True;
+		}
+		return False;
     }
 
     public function obtenerSaldo() {

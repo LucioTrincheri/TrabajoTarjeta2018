@@ -7,7 +7,6 @@ class FranquiciaCompleta extends Tarjeta{
 	protected $tipo = "Franq. C.";
 	
 	public function abonarPasaje(){
-		$hora = $this->tiempo->time();
 		$this->horaViaje = $this->tiempo->time();
 		return True;
 	}
