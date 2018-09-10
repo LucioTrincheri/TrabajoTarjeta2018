@@ -17,13 +17,14 @@ class FranquiciasTest extends TestCase {
 	public function testPagoValidoPlusMedioBoleto() {
 		$tiempoReal = new Tiempo;
 		$tarjeta = new MedioBoleto($tiempoReal); //uso tiempo real porque no afecta esta prueba, pero tener en cuenta que al usar tiempo real no se puede simular el paso del tiempo lo que activa la resticcion del medio boleto
-		$this->assertTrue($tarjeta->abonarPasaje());
+		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerPlus(), 1);
-		$this->assertTrue($tarjeta->abonarPasaje());
+		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerPlus(), 0);
 		$tarjeta->recargar(100);
+		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerPlus(), 2);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 70.4);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 63);
 	}
 
 	public function testValorPasajeMedioBoleto(){
