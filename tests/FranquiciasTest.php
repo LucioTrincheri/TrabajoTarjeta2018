@@ -97,6 +97,7 @@ class FranquiciasTest extends TestCase {
 		$tarjetaM->abonarPasaje();
 		$this->assertEquals($tarjetaF->obtenerSaldo(), 63);
 		$this->assertEquals($tarjetaM->obtenerSaldo(), 63);
+		$tiempoFalso->avanzar(500);
 		$tarjetaF->abonarPasaje();
 		$tiempoFalso->avanzar(90000);
 		$this->assertTrue($tarjetaF->abonarPasaje());
