@@ -42,7 +42,7 @@ class FranquiciasTest extends TestCase {
 		$this->assertEquals($tarjeta->obtenerSaldo(), $tarjeta2->obtenerSaldo());
 	}
 
-	public function PasajeSiempreFranComp(){
+	public function testPasajeSiempreFranComp(){
 		$tiempoReal = new Tiempo;
 		$tarjeta = new FranquiciaCompleta($tiempoReal);
 		$this->assertTrue($tarjeta->abonarPasaje());
