@@ -2,6 +2,8 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/LucioTrincheri/TrabajoTarjeta2018/badge.svg?branch=master)](https://coveralls.io/github/LucioTrincheri/TrabajoTarjeta2018?branch=master)
 
+https://img.shields.io/coveralls/github/LucioTrincheri/TrabajoTarjeta2018.svg
+
 Integrantes: Bolzan Francisco y Trincheri Lucio
 
 # Trabajo Tarjeta: Versión 2018
