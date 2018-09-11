@@ -71,9 +71,11 @@ class ColectivoTest extends TestCase {
 	*/
 	public function testPagoInvalido() {
 		$tiempoReal = new Tiempo;
+		$colectivo = new Colectivo(NULL,NULL,NULL);
 		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->abonarPasaje(); //Elimino los plus iniciales
 		$tarjeta->abonarPasaje();
 		$this->assertFalse($tarjeta->abonarPasaje());
+		$this->assertFalse($colectivo->pagarCon($tarjeta));
 	}
 }

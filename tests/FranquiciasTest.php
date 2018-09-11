@@ -14,13 +14,14 @@ class FranquiciasTest extends TestCase {
 		$this->assertEquals($tarjeta->obtenerSaldo(), 12.6);
 	}
 
-	public function testPagoValidoPlusMedioBoleto() {
+	public function testPagoValidoeInvalidoPlusMedioBoleto() {
 		$tiempoReal = new Tiempo;
 		$tarjeta = new MedioBoleto($tiempoReal); //uso tiempo real porque no afecta esta prueba, pero tener en cuenta que al usar tiempo real no se puede simular el paso del tiempo lo que activa la resticcion del medio boleto
 		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerPlus(), 1);
 		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerPlus(), 0);
+		$this->assertFalse($tarjeta->abonarPasaje());
 		$tarjeta->recargar(100);
 		$tarjeta->abonarPasaje();
 		$this->assertEquals($tarjeta->obtenerPlus(), 2);
@@ -45,6 +46,7 @@ class FranquiciasTest extends TestCase {
 		$tiempoReal = new Tiempo;
 		$tarjeta = new FranquiciaCompleta($tiempoReal);
 		$this->assertTrue($tarjeta->abonarPasaje());
+		$this->assertNotFalse($tarjeta->abonarPasaje());
 		$this->assertEquals($tarjeta->obtenerPlus(),2); //Pasaje abonado correctamente y cant. plus sigue siendo 2
 	}
 
@@ -84,6 +86,7 @@ class FranquiciasTest extends TestCase {
 		$tarjetaF->abonarPasaje();
 		$tarjetaM->abonarPasaje();
 		$tarjetaF->abonarPasaje();
+		$this->assertFalse($tarjetaF->abonarPasaje());
 		$tarjetaM->abonarPasaje();
 		$this->assertEquals($tarjetaF->obtenerPlus(), 0);
 		$this->assertEquals($tarjetaM->obtenerPlus(), 0);
@@ -94,6 +97,8 @@ class FranquiciasTest extends TestCase {
 		$tarjetaM->abonarPasaje();
 		$this->assertEquals($tarjetaF->obtenerSaldo(), 63);
 		$this->assertEquals($tarjetaM->obtenerSaldo(), 63);
+		$tiempoFalso->avanzar(90000);
+		$this->assertTrue($tarjetaF->abonarPasaje());
 		//chequeo que la hora en que se uso el plus no afecte al medio pero si a la f.completa
 	}
 }
