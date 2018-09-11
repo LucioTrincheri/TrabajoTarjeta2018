@@ -97,6 +97,7 @@ class FranquiciasTest extends TestCase {
 		$tarjetaM->abonarPasaje();
 		$this->assertEquals($tarjetaF->obtenerSaldo(), 63);
 		$this->assertEquals($tarjetaM->obtenerSaldo(), 63);
+		$tarjetaF->abonarPasaje();
 		$tiempoFalso->avanzar(90000);
 		$this->assertTrue($tarjetaF->abonarPasaje());
 		//chequeo que la hora en que se uso el plus no afecte al medio pero si a la f.completa
