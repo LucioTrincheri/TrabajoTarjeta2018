@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/LucioTrincheri/TrabajoTarjeta2018.svg?branch=master)](https://travis-ci.org/LucioTrincheri/TrabajoTarjeta2018)
 
+[![Coverage Status](https://coveralls.io/repos/github/LucioTrincheri/TrabajoTarjeta2018/badge.svg?branch=master)](https://coveralls.io/github/LucioTrincheri/TrabajoTarjeta2018?branch=master)
 
 Integrantes: Bolzan Francisco y Trincheri Lucio
 
