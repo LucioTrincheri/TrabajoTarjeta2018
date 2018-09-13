@@ -7,14 +7,14 @@ class Tarjeta implements TarjetaInterface {
     	protected $saldo=0;
 	protected $plus=2;
 	protected $valorPasaje = 14.8;
+	protected $puedeTrasb = False;
 	protected $horaViaje = 0;
 	protected $tipo = "Movi";
 	protected $ultViajePlus=0;
 	protected $ultimoAbono=0;
 	protected $ID=0;
 
-	protected $ultBoleto;
-	protected $colectivoActual;
+	protected $colectivoAnterior = NULL;
 
 	public function __construct(TiempoInterface $tiempo, $id=0)
 	{
@@ -48,73 +48,65 @@ class Tarjeta implements TarjetaInterface {
 		return $this->plus;
     }
 
-	protected function abonarTrasbordo($valor)
+//comienzo trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
+	protected function abonarTrasbordo($colectivo)
 	{
 		#esta funcion es llamada desde evaluar trasbordo si se cumplen todos los requisitos para el mismo
-
+		$valor = ($this->valorPasaje / 3 + abs($this->plus - 2) * $this->valorPasaje);
 		if($this->saldo >= $valor)
 		{
 			$this->saldo -= $valor;
 			$this->horaViaje = $this->tiempo->time();
+			$this->puedeTrasb = False;
+			$this->plus = 2;
 			$this->CalculoAbonoTotal($valor);
+			$this->NuevoColectivo($colectivo);
 			return True;
 		}
 		return False;
 	}
 
-	protected function evaluarTrasbordo()
+	protected function evaluarTrasbordo($colectivo)
 	{
-		/*esta funcion debe analizar:
-			colectivo anterior - colectivo actual
-			hora del dia y dia actual
-			diferencia ultimo viaje y viaje actual
-		*/
-		
-		if($this->compararBus() && $this->checkHora())
-		{
-			abonarTrasbordo($this->valorPasaje*0.33);
-		}
+		$saldoSuf = ($this->valorTrasb + abs($this->plus - 2) * $this->valorPasaje) < $this->saldo
+		return ($this->compararBus($colectivo) && $this->checkHora() && $puedeTrasb && $saldoSuf);
 	}
 	
-	protected function compararBus()
-	{
-		$ultColectivo = $this->ultBoleto->obtenerColectivo();
-	
-		if ($this->colectivoActual->linea != $ultColectivo->linea && $this->colectivoActual->numero != $ultColectivo->numero)
-		{
-			return True;
-		} 
+	protected function compararBus($colectivo)
+	{	
+		return (($this->colectivoAnterior->linea() != $colectivo->linea()) || ($this->colectivoAnterior->numero() != $colectivo->numero()));
 	}
 	
 	protected function checkHora()
 	{
-		#esta funcion chequea la hora del dia, calcula la diferencia necesaria y compara horarios entre viajes
+		#falta hacer que los tiempos sean correspondientes según en dia.
 		
-		if($this->tiempo->time() - $this->horaViaje <= 3600)
+		if(($this->tiempo->time() - $this->horaViaje) <= 3600)
 		{
 			return True;
 		}
 	}
 	
-
-	public function abonarPasaje(){
+//fin trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
+	public function abonarPasaje($colectivo){
 	
-		if($this->evaluarTrasbordo())
-		{
-			return True;
-		}
+		if($this->evaluarTrasbordo($colectivo)){return $this->abonarTrasbordo($colectivo);}
 		
 		if($this->saldo >= ($this->valorPasaje * (1 + abs($this->plus - 2))))
 		{
 			$this->saldo -= ($this->valorPasaje * (1 + abs($this->plus - 2)));
 			$this->horaViaje = $this->tiempo->time();
 			$this->plus = 2;
+			$this->puedeTrasb = True;
 			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))));
+			$this->NuevoColectivo($colectivo);
 			return True;
 		}else if($this->plus > 0){
 			$this->plus -= 1;
 			$this->horaViaje = $this->tiempo->time();
+			$this->puedeTrasb = True;
 			$this->CalculoAbonoTotal(0);
+			$this->NuevoColectivo($colectivo);
 			return True;
 		}
 		return False;
@@ -135,7 +127,8 @@ class Tarjeta implements TarjetaInterface {
 			return NULL;
 		}
 		$this->ultimoAbono = $total;
-		$this->ultViajePlus = ($total - $this->valorPasaje) / $this->valorPasaje;
+		$this->ultViajePlus = round($total / $this->valorPasaje);
+		$this->ultPasaje = $total - ($this->ultViajePlus * $this->valorPasaje);
 	}
 
 	public function ultAbono(){
@@ -144,6 +137,10 @@ class Tarjeta implements TarjetaInterface {
 
 	public function ultCantPlus(){
 		return $this->ultViajePlus;
+	}
+	
+	public function ultPasaje(){
+		return $this->ultPasaje;
 	}
 
 	public function getID(){
@@ -154,13 +151,7 @@ class Tarjeta implements TarjetaInterface {
 		return $this->horaViaje;
 	}
 
-	public function guardarBoleto($boleto)
-	{
-		$this->ultBoleto = $boleto;
-	}
-
-	public function guardarColectivo($colectivo)
-	{
-		$this->colectivoActual = $colectivo;
+	public function NuevoColectivo($colectivo){
+		$this->colectivoAnterior = $colectivo;
 	}
 }

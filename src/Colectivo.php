@@ -28,17 +28,13 @@ class Colectivo implements ColectivoInterface {
 
 	public function pagarCon(TarjetaInterface $tarjeta)
 	{
-		$tarjeta->guardarColectivo($this);
-
-		if($tarjeta->abonarPasaje())
+		if($tarjeta->abonarPasaje($this))
 		{
 			$boleto = new Boleto($this, $tarjeta);
-			$tarjeta->guardarBoleto($boleto);
 			return $boleto;
 		}
 		else{
 			return False;
 		}
 	}
-
 }

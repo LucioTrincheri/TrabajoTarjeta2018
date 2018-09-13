@@ -26,6 +26,7 @@ class Boleto implements BoletoInterface {
 		$this->lineaC = $colectivo->linea();
 		$this->abono = $tarjeta->ultAbono();
 		$this->plusA = $tarjeta->ultCantPlus();
+		$this->PasjAbonado = $tarjeta->ultPasaje();
     }
 
     public function Fecha() {
@@ -54,6 +55,10 @@ class Boleto implements BoletoInterface {
 
     public function PlusAbonados() {
         return $this->plusA;
+    }
+	
+    public function PasajeAbonado() {
+        return $this->PasjAbonado;
     }
 
 	public function obtenerTarjeta() {
