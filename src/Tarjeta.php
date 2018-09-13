@@ -12,7 +12,10 @@ class Tarjeta implements TarjetaInterface {
 	protected $ultViajePlus=0;
 	protected $ultimoAbono=0;
 	protected $ID=0;
-	
+
+	protected $ultBoleto;
+	protected $colectivoActual;
+
 	public function __construct(TiempoInterface $tiempo, $id=0)
 	{
 		$this->tiempo = $tiempo;
@@ -45,7 +48,47 @@ class Tarjeta implements TarjetaInterface {
 		return $this->plus;
     }
 
+	protected function abonarTrasbordo()
+	{
+		#esta funcion es llamada desde evaluar trasbordo si se cumplen todos los requisitos para el mismo
+	}
+
+	protected function evaluarTrasbordo()
+	{
+		/*esta funcion debe analizar:
+			colectivo anterior - colectivo actual
+			hora del dia y dia actual
+			diferencia ultimo viaje y viaje actual
+		*/
+	}
+	
+	protected function compararBus()
+	{
+		$ultColectivo = $this->ultBoleto->obtenerColectivo();
+	
+		if ($this->colectivoActual->linea != $ultColectivo->linea && $this->colectivoActual->numero != $ultColectivo->numero)
+		{
+			return True;
+		} 
+	}
+	
+	protected function checkHora()
+	{
+		#esta funcion chequea la hora del dia, calcula la diferencia necesaria y llama a la comparacion de horarios entre viajes
+	}
+	
+	protected function compararHoras()
+	{
+		#compara horas
+	}
+
 	public function abonarPasaje(){
+	
+		if($this->evaluarTrasbordo())
+		{
+			return True;
+		}
+		
 		if($this->saldo >= ($this->valorPasaje * (1 + abs($this->plus - 2))))
 		{
 			$this->saldo -= ($this->valorPasaje * (1 + abs($this->plus - 2)));
@@ -94,5 +137,15 @@ class Tarjeta implements TarjetaInterface {
 
 	public function getHora(){
 		return $this->horaViaje;
+	}
+
+	public function guardarBoleto($boleto)
+	{
+		$this->ultBoleto = $boleto;
+	}
+
+	public function guardarColectivo($colectivo)
+	{
+		$this->colectivoActual = $colectivo;
 	}
 }

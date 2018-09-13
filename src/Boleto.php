@@ -56,6 +56,10 @@ class Boleto implements BoletoInterface {
         return $this->plusA;
     }
 
+	public function obtenerTarjeta() {
+		return $this->tarjeta;
+    }
+
     public function obtenerColectivo() {
 		return $this->colectivo;
     }
