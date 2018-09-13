@@ -78,4 +78,17 @@ class ColectivoTest extends TestCase {
 		$this->assertFalse($tarjeta->abonarPasaje());
 		$this->assertFalse($colectivo->pagarCon($tarjeta));
 	}
+
+	public function testTrasbordo() {
+		$tiempoFalso = new TiempoFalso;
+		$tarjeta = new Tarjeta($tiempoFalso);
+		$tarjeta->recargar(50);
+		$colectivo1 = new Colectivo("Semtur","Azul","102");
+		$this->assertTrue($colectivo1->pagarCon($tarjeta) instanceof Boleto);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 35.2);
+		$tiempoFalso -> avanzar(600);
+		$colectivo2 = new Colectivo("Semtur","Amarillo","145");
+		$this->assertTrue($colectivo2->pagarCon($tarjeta) instanceof Boleto);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 30.316);
+	}
 }
