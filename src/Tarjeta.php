@@ -48,9 +48,18 @@ class Tarjeta implements TarjetaInterface {
 		return $this->plus;
     }
 
-	protected function abonarTrasbordo()
+	protected function abonarTrasbordo($valor)
 	{
 		#esta funcion es llamada desde evaluar trasbordo si se cumplen todos los requisitos para el mismo
+
+		if($this->saldo >= $valor)
+		{
+			$this->saldo -= $valor;
+			$this->horaViaje = $this->tiempo->time();
+			$this->CalculoAbonoTotal($valor);
+			return True;
+		}
+		return False;
 	}
 
 	protected function evaluarTrasbordo()
@@ -60,6 +69,11 @@ class Tarjeta implements TarjetaInterface {
 			hora del dia y dia actual
 			diferencia ultimo viaje y viaje actual
 		*/
+		
+		if($this->compararBus() && $this->checkHora())
+		{
+			abonarTrasbordo($this->valorPasaje*0.33);
+		}
 	}
 	
 	protected function compararBus()
@@ -74,13 +88,14 @@ class Tarjeta implements TarjetaInterface {
 	
 	protected function checkHora()
 	{
-		#esta funcion chequea la hora del dia, calcula la diferencia necesaria y llama a la comparacion de horarios entre viajes
+		#esta funcion chequea la hora del dia, calcula la diferencia necesaria y compara horarios entre viajes
+		
+		if($this->tiempo->time() - $this->horaViaje <= 3600)
+		{
+			return True;
+		}
 	}
 	
-	protected function compararHoras()
-	{
-		#compara horas
-	}
 
 	public function abonarPasaje(){
 	
