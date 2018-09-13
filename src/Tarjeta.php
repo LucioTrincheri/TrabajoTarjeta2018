@@ -12,9 +12,11 @@ class Tarjeta implements TarjetaInterface {
 	protected $tipo = "Movi";
 	protected $ultViajePlus=0;
 	protected $ultimoAbono=0;
+	protected $ultPasaje=0;
 	protected $ID=0;
 
-	protected $colectivoAnterior = NULL;
+	protected $lineaAnterior = "Inicializacion";
+	protected $numeroAnterior = "Inicializacion";
 
 	public function __construct(TiempoInterface $tiempo, $id=0)
 	{
@@ -52,14 +54,14 @@ class Tarjeta implements TarjetaInterface {
 	protected function abonarTrasbordo($colectivo)
 	{
 		#esta funcion es llamada desde evaluar trasbordo si se cumplen todos los requisitos para el mismo
-		$valor = ($this->valorPasaje / 3 + abs($this->plus - 2) * $this->valorPasaje);
+		$valor = (round(($this->valorPasaje / 3),3) + abs($this->plus - 2) * $this->valorPasaje);
 		if($this->saldo >= $valor)
 		{
 			$this->saldo -= $valor;
 			$this->horaViaje = $this->tiempo->time();
 			$this->puedeTrasb = False;
 			$this->plus = 2;
-			$this->CalculoAbonoTotal($valor);
+			$this->CalculoAbonoTotal($valor , round(($this->valorPasaje / 3),3));
 			$this->NuevoColectivo($colectivo);
 			return True;
 		}
@@ -68,13 +70,13 @@ class Tarjeta implements TarjetaInterface {
 
 	protected function evaluarTrasbordo($colectivo)
 	{
-		$saldoSuf = ($this->valorTrasb + abs($this->plus - 2) * $this->valorPasaje) < $this->saldo;
-		return ($this->compararBus($colectivo) && $this->checkHora() && $puedeTrasb && $saldoSuf);
+		$saldoSuf = (round(($this->valorPasaje / 3),3) + abs($this->plus - 2) * $this->valorPasaje) < $this->saldo;
+		return ($this->compararBus($colectivo) && $this->checkHora() && $this->puedeTrasb && $saldoSuf);
 	}
 	
 	protected function compararBus($colectivo)
 	{	
-		return (($this->colectivoAnterior->linea() != $colectivo->linea()) || ($this->colectivoAnterior->numero() != $colectivo->numero()));
+		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
 	}
 	
 	protected function checkHora()
@@ -88,7 +90,7 @@ class Tarjeta implements TarjetaInterface {
 	}
 	
 //fin trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
-	public function abonarPasaje($colectivo){
+	public function abonarPasaje(ColectivoInterface $colectivo){
 	
 		if($this->evaluarTrasbordo($colectivo)){return $this->abonarTrasbordo($colectivo);}
 		
@@ -98,14 +100,14 @@ class Tarjeta implements TarjetaInterface {
 			$this->horaViaje = $this->tiempo->time();
 			$this->plus = 2;
 			$this->puedeTrasb = True;
-			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))));
+			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))), $this->valorPasaje);
 			$this->NuevoColectivo($colectivo);
 			return True;
 		}else if($this->plus > 0){
 			$this->plus -= 1;
 			$this->horaViaje = $this->tiempo->time();
 			$this->puedeTrasb = True;
-			$this->CalculoAbonoTotal(0);
+			$this->CalculoAbonoTotal(0, 0);
 			$this->NuevoColectivo($colectivo);
 			return True;
 		}
@@ -120,15 +122,15 @@ class Tarjeta implements TarjetaInterface {
 		return $this->tipo;
 	}
 	
-	public function CalculoAbonoTotal($total){
+	public function CalculoAbonoTotal($total , $valor){
 		if($total == 0){
 			$this->ultimoAbono=0;
 			$this->ultViajePlus=1;
 			return NULL;
 		}
 		$this->ultimoAbono = $total;
-		$this->ultViajePlus = round($total / $this->valorPasaje);
-		$this->ultPasaje = $total - ($this->ultViajePlus * $this->valorPasaje);
+		$this->ultViajePlus = round(($total - $valor) / $this->valorPasaje);
+		$this->ultPasaje = $valor;
 	}
 
 	public function ultAbono(){
@@ -139,7 +141,7 @@ class Tarjeta implements TarjetaInterface {
 		return $this->ultViajePlus;
 	}
 	
-	public function ultPasaje(){
+	public function ultPasajeAbonado(){
 		return $this->ultPasaje;
 	}
 
@@ -152,6 +154,7 @@ class Tarjeta implements TarjetaInterface {
 	}
 
 	public function NuevoColectivo($colectivo){
-		$this->colectivoAnterior = $colectivo;
+		$this->lineaAnterior = $colectivo->linea();
+		$this->numeroAnterior = $colectivo->numero();
 	}
 }

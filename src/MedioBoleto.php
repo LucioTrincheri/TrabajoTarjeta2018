@@ -8,7 +8,8 @@ class MedioBoleto extends Tarjeta
 	protected $nueva = True;
 	protected $tipo = "Medio";
 
-	public function abonarPasaje(){
+	public function abonarPasaje(ColectivoInterface $colectivo){
+		if($this->evaluarTrasbordo($colectivo)){return $this->abonarTrasbordo($colectivo);}
 		if($this->saldo >= ($this->valorPasaje * (1 + abs($this->plus - 2) * 2)))
 		{
 			$hora = $this->tiempo->time();
