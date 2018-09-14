@@ -18,7 +18,6 @@ interface BoletoInterface {
      */
     public function obtenerColectivo();
 
-	public function obtenerTarjeta();
 
 	public function Fecha();
 
