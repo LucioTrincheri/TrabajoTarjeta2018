@@ -51,35 +51,30 @@ class Tarjeta implements TarjetaInterface {
     }
 
 //comienzo trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
-	protected function abonarTrasbordo($colectivo)
+	public function abonarTrasbordo($colectivo)
 	{
-		#esta funcion es llamada desde evaluar trasbordo si se cumplen todos los requisitos para el mismo
 		$valor = (round(($this->valorPasaje / 3),3) + abs($this->plus - 2) * $this->valorPasaje);
-		if($this->saldo >= $valor)
-		{
-			$this->saldo -= $valor;
-			$this->horaViaje = $this->tiempo->time();
-			$this->puedeTrasb = False;
-			$this->plus = 2;
-			$this->CalculoAbonoTotal($valor , round(($this->valorPasaje / 3),3));
-			$this->NuevoColectivo($colectivo);
-			return True;
-		}
-		return False;
+		$this->saldo -= $valor;
+		$this->horaViaje = $this->tiempo->time();
+		$this->puedeTrasb = False;
+		$this->plus = 2;
+		$this->CalculoAbonoTotal($valor , round(($this->valorPasaje / 3),3));
+		$this->NuevoColectivo($colectivo);
+		return True;
 	}
 
-	protected function evaluarTrasbordo($colectivo)
+	public function evaluarTrasbordo($colectivo)
 	{
 		$saldoSuf = (round(($this->valorPasaje / 3),3) + abs($this->plus - 2) * $this->valorPasaje) < $this->saldo;
 		return ($this->compararBus($colectivo) && $this->checkHora() && $this->puedeTrasb && $saldoSuf);
 	}
 	
-	protected function compararBus($colectivo)
+	public function compararBus($colectivo)
 	{	
 		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
 	}
 	
-	protected function checkHora()
+	public function checkHora()
 	{
 		#falta hacer que los tiempos sean correspondientes según en dia.
 		
