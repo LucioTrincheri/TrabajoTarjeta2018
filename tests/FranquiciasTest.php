@@ -126,10 +126,10 @@ class FranquiciasTest extends TestCase {
 		$this->assertEquals($tarjeta->obtenerSaldo(), 40.133);
 		$tiempoFalso -> avanzar(600);
 		$this->assertTrue($colectivo1->pagarCon($tarjeta) instanceof Boleto);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 25.333); //ya no tengo plus
+		$this->assertEquals($tarjeta->obtenerSaldo(), 32.733);
 		$tiempoFalso -> avanzar(100); //avanzo lo suficiente para trasbordo pero no medio boleto.
 		$this->assertTrue($colectivo2->pagarCon($tarjeta) instanceof Boleto);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 20.4);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 27.8);
 	}
 
 	public function testTrasbordoMedioUni() {
@@ -145,9 +145,9 @@ class FranquiciasTest extends TestCase {
 		$this->assertEquals($tarjeta->obtenerSaldo(), 40.133); //pago medio + trasbordo
 		$tiempoFalso -> avanzar(600);
 		$this->assertTrue($colectivo1->pagarCon($tarjeta) instanceof Boleto);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 32.733);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 25.333); //ya no tengo plus
 		$tiempoFalso -> avanzar(100); //avanzo lo suficiente para trasbordo pero no medio boleto.
 		$this->assertTrue($colectivo2->pagarCon($tarjeta) instanceof Boleto);
-		$this->assertEquals($tarjeta->obtenerSaldo(), 27.8);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 20.4);
 	}
 }
