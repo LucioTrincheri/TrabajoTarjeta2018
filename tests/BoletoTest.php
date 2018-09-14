@@ -42,6 +42,7 @@ class BoletoTest extends TestCase {
 		$this->assertEquals($boleto->IDTarjeta(), 0);
 		$this->assertEquals($boleto->LineaColectivo(), "142 Verde");
 		$this->assertEquals($boleto->Abono(), 14.8);
+		$this->assertEquals($boleto->PasajeAbonado(), 14.8);
 		$this->assertEquals($boleto->PlusAbonados(), 0);
 	}
 }
