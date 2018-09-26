@@ -50,9 +50,10 @@ class TarjetaTest extends TestCase {
      */
 	public function testAbonoTarjeta() {
 		$tiempoReal = new Tiempo;
+		$colectivo = new Colectivo();
 		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(20);
-		$tarjeta->abonarPasaje();
+		$tarjeta->abonarPasaje($colectivo);
 		$this->assertEquals($tarjeta->valorDelPasaje(),14.8);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.2);
 	}
@@ -60,10 +61,24 @@ class TarjetaTest extends TestCase {
 	public function testRecargaPlus() {
 		$tiempoReal = new Tiempo;
 		$tarjeta = new Tarjeta($tiempoReal);
-		$tarjeta->abonarPasaje();
-		$tarjeta->abonarPasaje();
+		$colectivo = new Colectivo();
+		$tarjeta->abonarPasaje($colectivo);
+		$tarjeta->abonarPasaje($colectivo);
 		$tarjeta->recargar(50);
-		$tarjeta->abonarPasaje();
+		$tarjeta->abonarPasaje($colectivo);
 		$this->assertEquals($tarjeta->obtenerSaldo(), 5.6); //Abono 2 plus + pasaje = 44.4
+	}
+
+	public function testTrasbordo() {
+		$tiempoFalso = new TiempoFalso;
+		$tarjeta = new Tarjeta($tiempoFalso);
+		$tarjeta->recargar(50);
+		$colectivo1 = new Colectivo("Semtur","Azul","102");
+		$this->assertTrue($colectivo1->pagarCon($tarjeta) instanceof Boleto);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 35.2);
+		$tiempoFalso -> avanzar(600);
+		$colectivo2 = new Colectivo("Semtur","Amarillo","145");
+		$this->assertTrue($colectivo2->pagarCon($tarjeta) instanceof Boleto);
+		$this->assertEquals($tarjeta->obtenerSaldo(), 30.267);
 	}
 }

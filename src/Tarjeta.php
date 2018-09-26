@@ -7,12 +7,17 @@ class Tarjeta implements TarjetaInterface {
     	protected $saldo=0;
 	protected $plus=2;
 	protected $valorPasaje = 14.8;
+	protected $puedeTrasb = False;
 	protected $horaViaje = 0;
 	protected $tipo = "Movi";
 	protected $ultViajePlus=0;
 	protected $ultimoAbono=0;
+	protected $ultPasaje=0;
 	protected $ID=0;
-	
+
+	protected $lineaAnterior = "Inicializacion";
+	protected $numeroAnterior = "Inicializacion";
+
 	public function __construct(TiempoInterface $tiempo, $id=0)
 	{
 		$this->tiempo = $tiempo;
@@ -45,18 +50,60 @@ class Tarjeta implements TarjetaInterface {
 		return $this->plus;
     }
 
-	public function abonarPasaje(){
+//comienzo trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
+	public function abonarTrasbordo($colectivo)
+	{
+		$valor = (round(($this->valorPasaje / 3),3) + abs($this->plus - 2) * $this->valorPasaje);
+		$this->saldo -= $valor;
+		$this->horaViaje = $this->tiempo->time();
+		$this->puedeTrasb = False;
+		$this->plus = 2;
+		$this->CalculoAbonoTotal($valor , round(($this->valorPasaje / 3),3));
+		$this->NuevoColectivo($colectivo);
+		return True;
+	}
+
+	public function evaluarTrasbordo($colectivo)
+	{
+		$saldoSuf = (round(($this->valorPasaje / 3),3) + abs($this->plus - 2) * $this->valorPasaje) < $this->saldo;
+		return ($this->compararBus($colectivo) && $this->checkHora() && $this->puedeTrasb && $saldoSuf);
+	}
+	
+	public function compararBus($colectivo)
+	{	
+		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
+	}
+	
+	public function checkHora()
+	{
+		#falta hacer que los tiempos sean correspondientes según en dia.
+		
+		if(($this->tiempo->time() - $this->horaViaje) <= 3600)
+		{
+			return True;
+		}
+	}
+	
+//fin trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
+	public function abonarPasaje(ColectivoInterface $colectivo){
+	
+		if($this->evaluarTrasbordo($colectivo)){return $this->abonarTrasbordo($colectivo);}
+		
 		if($this->saldo >= ($this->valorPasaje * (1 + abs($this->plus - 2))))
 		{
 			$this->saldo -= ($this->valorPasaje * (1 + abs($this->plus - 2)));
 			$this->horaViaje = $this->tiempo->time();
 			$this->plus = 2;
-			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))));
+			$this->puedeTrasb = True;
+			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))), $this->valorPasaje);
+			$this->NuevoColectivo($colectivo);
 			return True;
 		}else if($this->plus > 0){
 			$this->plus -= 1;
 			$this->horaViaje = $this->tiempo->time();
-			$this->CalculoAbonoTotal(0);
+			$this->puedeTrasb = True;
+			$this->CalculoAbonoTotal(0, 0);
+			$this->NuevoColectivo($colectivo);
 			return True;
 		}
 		return False;
@@ -70,14 +117,15 @@ class Tarjeta implements TarjetaInterface {
 		return $this->tipo;
 	}
 	
-	public function CalculoAbonoTotal($total){
+	public function CalculoAbonoTotal($total , $valor){
 		if($total == 0){
 			$this->ultimoAbono=0;
 			$this->ultViajePlus=1;
 			return NULL;
 		}
 		$this->ultimoAbono = $total;
-		$this->ultViajePlus = ($total - $this->valorPasaje) / $this->valorPasaje;
+		$this->ultViajePlus = round(($total - $valor) / $this->valorPasaje);
+		$this->ultPasaje = $valor;
 	}
 
 	public function ultAbono(){
@@ -87,6 +135,10 @@ class Tarjeta implements TarjetaInterface {
 	public function ultCantPlus(){
 		return $this->ultViajePlus;
 	}
+	
+	public function ultPasajeAbonado(){
+		return $this->ultPasaje;
+	}
 
 	public function getID(){
 		return $this->ID;
@@ -94,5 +146,10 @@ class Tarjeta implements TarjetaInterface {
 
 	public function getHora(){
 		return $this->horaViaje;
+	}
+
+	public function NuevoColectivo($colectivo){
+		$this->lineaAnterior = $colectivo->linea();
+		$this->numeroAnterior = $colectivo->numero();
 	}
 }
