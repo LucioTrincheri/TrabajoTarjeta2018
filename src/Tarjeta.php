@@ -76,12 +76,14 @@ class Tarjeta implements TarjetaInterface {
 	
 	public function checkHora()
 	{
-		#falta hacer que los tiempos sean correspondientes según en dia.
-		
-		if(($this->tiempo->time() - $this->horaViaje) <= 3600)
-		{
-			return True;
+		#falta agregar feriados.
+		$sabado = (date("w") == 6 && (date("G") >= 14 && date("G") < 22));
+		$domingo = (date("w") == 0 && (date("G") >= 6 && date("G") < 22));
+		$noche = (date("G") >= 22 && date("G") < 6);
+		if($sabado || $domingo || $noche){
+			return ($this->tiempo->time() - $this->horaViaje < 5400);
 		}
+		return ($this->tiempo->time() - $this->horaViaje < 3600);
 	}
 	
 //fin trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
