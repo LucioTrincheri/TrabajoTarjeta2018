@@ -18,7 +18,7 @@ class Tarjeta implements TarjetaInterface {
 	protected $lineaAnterior = "Inicializacion";
 	protected $numeroAnterior = "Inicializacion";
 
-	public function __construct(TiempoInterface $tiempo, $id=0)
+	public function __construct($tiempo, $id=0)
 	{
 		$this->tiempo = $tiempo;
 		$this->ID = $id;
@@ -77,9 +77,9 @@ class Tarjeta implements TarjetaInterface {
 	public function checkHora()
 	{
 		#falta agregar feriados.
-		$sabado = (date("w") == 6 && (date("G") >= 14 && date("G") < 22));
-		$domingo = (date("w") == 0 && (date("G") >= 6 && date("G") < 22));
-		$noche = (date("G") >= 22 && date("G") < 6);
+		$sabado = (date("w", $this->tiempo->time()) == 6 && (date("G", $this->tiempo->time()) >= 14 && date("G", $this->tiempo->time()) < 22));
+		$domingo = (date("w", $this->tiempo->time()) == 0 && (date("G", $this->tiempo->time()) >= 6 && date("G", $this->tiempo->time()) < 22));
+		$noche = (date("G", $this->tiempo->time()) >= 22 && date("G", $this->tiempo->time()) < 6);
 		if($sabado || $domingo || $noche){
 			return ($this->tiempo->time() - $this->horaViaje < 5400);
 		}
@@ -149,6 +149,9 @@ class Tarjeta implements TarjetaInterface {
 	public function getHora(){
 		return $this->horaViaje;
 	}
+	
+	public function tiempofalso(){
+		return $this->tiempo->time();}
 
 	public function NuevoColectivo($colectivo){
 		$this->lineaAnterior = $colectivo->linea();
