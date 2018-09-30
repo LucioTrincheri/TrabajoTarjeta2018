@@ -149,9 +149,6 @@ class Tarjeta implements TarjetaInterface {
 	public function getHora(){
 		return $this->horaViaje;
 	}
-	
-	public function tiempofalso(){
-		return $this->tiempo->time();}
 
 	public function NuevoColectivo($colectivo){
 		$this->lineaAnterior = $colectivo->linea();
