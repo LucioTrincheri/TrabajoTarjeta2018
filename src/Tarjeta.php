@@ -24,22 +24,19 @@ class Tarjeta implements TarjetaInterface {
 		$this->ID = $id;
 	}
 	
-		
+	public function montoValido($monto) {
+		return in_array($monto, [10, 20, 30, 50, 100, 510.15, 962.59]);
+	}
+
 	public function recargar($monto) {
-		if ($monto == 10 || $monto == 20 || $monto == 30 || $monto == 50 || $monto == 100 || $monto == 510.15 || $monto == 962.59) {
-
-			if ($monto == 510.15) {
-				$this->saldo += 81.93;
-			}
-
-			if ($monto == 962.59) {
-				$this->saldo += 221.58;
-			}
-
-			$this->saldo += $monto;
-			return True;
-		}
-		return False;
+		if (!$this->montoValido($monto))
+			return False;
+		if ($monto == 510.15)
+			$this->saldo += 81.93;
+		if ($monto == 962.59)
+			$this->saldo += 221.58;
+		$this->saldo += $monto;
+		return True;
 	}
 
 	public function obtenerSaldo() {
@@ -50,9 +47,8 @@ class Tarjeta implements TarjetaInterface {
 		return $this->plus;
 	}
 
-//comienzo trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
-	public function abonarTrasbordo($colectivo)
-	{
+//comienzo trasbordo y métodos derivados --------
+	public function abonarTrasbordo($colectivo) {
 		$valor = (round(($this->valorPasaje / 3), 3) + abs($this->plus - 2) * $this->valorPasaje);
 		$this->saldo -= $valor;
 		$this->horaViaje = $this->tiempo->time();
@@ -63,26 +59,24 @@ class Tarjeta implements TarjetaInterface {
 		return True;
 	}
 
-	public function evaluarTrasbordo($colectivo)
-	{
+	public function evaluarTrasbordo($colectivo) {
 		$saldoSuf = (round(($this->valorPasaje / 3), 3) + abs($this->plus - 2) * $this->valorPasaje) < $this->saldo;
 		return ($this->compararBus($colectivo) && $this->checkHora() && $this->puedeTrasb && $saldoSuf);
 	}
 	
-	public function compararBus($colectivo)
-	{	
+	public function compararBus($colectivo) {	
 		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
 	}
 	
-	public function checkHora()
-	{
-		#falta agregar feriados.
+	public function intervaloTrasbordo() {
 		$sabado = (date("w", $this->tiempo->time()) == 6 && (date("G", $this->tiempo->time()) >= 14 && date("G", $this->tiempo->time()) < 22));
 		$domingo = (date("w", $this->tiempo->time()) == 0 && (date("G", $this->tiempo->time()) >= 6 && date("G", $this->tiempo->time()) < 22));
 		$noche = (date("G", $this->tiempo->time()) >= 22 && date("G", $this->tiempo->time()) < 6);
-		if ($sabado || $domingo || $noche) {
+		return ($sabado || $domingo || $noche);
+	}
+	public function checkHora() {
+		if ($this->intervaloTrasbordo())
 			return ($this->tiempo->time() - $this->horaViaje < 5400);
-		}
 		return ($this->tiempo->time() - $this->horaViaje < 3600);
 	}
 	
