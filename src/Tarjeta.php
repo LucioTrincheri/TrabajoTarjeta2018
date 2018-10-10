@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
 
-		protected $saldo=0;
+	protected $saldo=0;
 	protected $plus=2;
 	protected $valorPasaje = 14.8;
 	protected $puedeTrasb = False;
