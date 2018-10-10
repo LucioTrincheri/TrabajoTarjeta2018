@@ -4,7 +4,7 @@ namespace TrabajoTarjeta;
 
 class Boleto implements BoletoInterface {
 
-    protected $colectivo;
+	protected $colectivo;
 	protected $tarjeta;
 
 	protected $fecha;
@@ -15,7 +15,7 @@ class Boleto implements BoletoInterface {
 	protected $abono;
 	protected $plusA;
 
-    public function __construct($colectivo, $tarjeta) {
+	public function __construct($colectivo, $tarjeta) {
 		$this->colectivo = $colectivo;
 		$this->tarjeta = $tarjeta;
 
@@ -27,43 +27,43 @@ class Boleto implements BoletoInterface {
 		$this->abono = $tarjeta->ultAbono();
 		$this->plusA = $tarjeta->ultCantPlus();
 		$this->PasjAbonado = $tarjeta->ultPasajeAbonado();
-    }
+	}
 
-    public function Fecha() {
-        return $this->fecha;
-    }
+	public function Fecha() {
+		return $this->fecha;
+	}
 
-    public function TipoTarjeta() {
-        return $this->tipoT;
-    }
+	public function TipoTarjeta() {
+		return $this->tipoT;
+	}
 
-    public function SaldoTarjeta() {
-        return $this->saldoT;
-    }
+	public function SaldoTarjeta() {
+		return $this->saldoT;
+	}
 
-    public function IDTarjeta() {
-        return $this->IDT;
-    }
+	public function IDTarjeta() {
+		return $this->IDT;
+	}
 
-    public function LineaColectivo() {
-        return $this->lineaC;
-    }
+	public function LineaColectivo() {
+		return $this->lineaC;
+	}
 
-    public function Abono() {
-        return $this->abono;
-    }
+	public function Abono() {
+		return $this->abono;
+	}
 
-    public function PlusAbonados() {
-        return $this->plusA;
-    }
+	public function PlusAbonados() {
+		return $this->plusA;
+	}
 	
-    public function PasajeAbonado() {
-        return $this->PasjAbonado;
-    }
+	public function PasajeAbonado() {
+		return $this->PasjAbonado;
+	}
 
 
 
-    public function obtenerColectivo() {
+	public function obtenerColectivo() {
 		return $this->colectivo;
-    }
+	}
 }

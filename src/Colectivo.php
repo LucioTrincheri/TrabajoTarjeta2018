@@ -4,17 +4,17 @@ namespace TrabajoTarjeta;
 
 class Colectivo implements ColectivoInterface {
 
-    protected $linea;
-    protected $empresa;
+	protected $linea;
+	protected $empresa;
 	protected $numero;
 
-    public function __construct($empresa=NULL, $linea=NULL, $numero=NULL) {
-        $this->empresa = $empresa;
+	public function __construct($empresa=NULL, $linea=NULL, $numero=NULL) {
+		$this->empresa = $empresa;
 		$this->linea = $linea;
 		$this->numero = $numero;
-    }
+	}
 
-    public function linea(){
+	public function linea(){
 		return $this->linea;
 	}
 
@@ -32,8 +32,7 @@ class Colectivo implements ColectivoInterface {
 		{
 			$boleto = new Boleto($this, $tarjeta);
 			return $boleto;
-		}
-		else{
+		} else{
 			return False;
 		}
 	}
