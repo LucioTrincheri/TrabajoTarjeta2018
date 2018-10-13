@@ -6,7 +6,7 @@ class Boleto implements BoletoInterface {
 
 	protected $colectivo;
 	protected $tarjeta;
-
+	protected $PasjAbonado;
 	protected $fecha;
 	protected $tipoT;
 	protected $saldoT;
@@ -18,7 +18,6 @@ class Boleto implements BoletoInterface {
 	public function __construct($colectivo, $tarjeta) {
 		$this->colectivo = $colectivo;
 		$this->tarjeta = $tarjeta;
-
 		$this->fecha = $tarjeta->getHora();
 		$this->tipoT = $tarjeta->tipoTarjeta();
 		$this->saldoT = $tarjeta->obtenerSaldo();
@@ -60,8 +59,6 @@ class Boleto implements BoletoInterface {
 	public function PasajeAbonado() {
 		return $this->PasjAbonado;
 	}
-
-
 
 	public function obtenerColectivo() {
 		return $this->colectivo;

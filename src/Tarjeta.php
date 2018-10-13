@@ -14,7 +14,7 @@ class Tarjeta implements TarjetaInterface {
 	protected $ultimoAbono=0;
 	protected $ultPasaje=0;
 	protected $ID=0;
-
+	protected $tiempo;
 	protected $lineaAnterior = "Inicializacion";
 	protected $numeroAnterior = "Inicializacion";
 

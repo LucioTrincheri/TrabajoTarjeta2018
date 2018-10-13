@@ -7,12 +7,9 @@ class MedioBoleto extends Tarjeta
 	protected $valorPasaje = 7.4;
 	protected $nueva = True;
 	protected $tipo = "Medio";
-	protected $hora = 0;
-
-
 
 	public function evaluarTrasbordo($colectivo) {
-		if ($this->hora - $this->horaViaje >= 300 || $this->nueva == True) {
+		if ($this->tiempo->time() - $this->horaViaje >= 300 || $this->nueva == True) {
 			$saldoSuf = (round(($this->valorPasaje / 3), 3) + abs($this->plus - 2) * $this->valorPasaje * 2) < $this->saldo;
 		}
 		else {
@@ -23,7 +20,7 @@ class MedioBoleto extends Tarjeta
 
 
 	public function abonarTrasbordo($colectivo) {
-		if ($this->hora - $this->horaViaje >= 300 || $this->nueva == True) {
+		if ($this->tiempo->time() - $this->horaViaje >= 300 || $this->nueva == True) {
 			$valor = (round(($this->valorPasaje / 3), 3) + abs($this->plus - 2) * $this->valorPasaje * 2);
 		}
 		else {
@@ -45,11 +42,10 @@ class MedioBoleto extends Tarjeta
 
 
 	public function abonarPasaje(ColectivoInterface $colectivo) {
-		$this->hora = $this->tiempo->time();
 		if ($this->evaluarTrasbordo($colectivo)) {return $this->abonarTrasbordo($colectivo); }
 		if ($this->saldo >= ($this->valorPasaje * (1 + abs($this->plus - 2) * 2)))
 		{
-			if ($this->hora - $this->horaViaje >= 300 || $this->nueva == True)
+			if ($this->tiempo->time() - $this->horaViaje >= 300 || $this->nueva == True)
 			{
 				$this->saldo -= ($this->valorPasaje * (1 + abs($this->plus - 2) * 2));
 				$this->horaViaje = $this->tiempo->time();
