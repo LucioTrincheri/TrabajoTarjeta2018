@@ -4,21 +4,21 @@ namespace TrabajoTarjeta;
 
 class Tarjeta implements TarjetaInterface {
 
-	protected $saldo=0;
-	protected $plus=2;
+	protected $saldo = 0;
+	protected $plus = 2;
 	protected $valorPasaje = 14.8;
 	protected $puedeTrasb = False;
 	protected $horaViaje = 0;
 	protected $tipo = "Movi";
-	protected $ultViajePlus=0;
-	protected $ultimoAbono=0;
-	protected $ultPasaje=0;
-	protected $ID=0;
+	protected $ultViajePlus = 0;
+	protected $ultimoAbono = 0;
+	protected $ultPasaje = 0;
+	protected $ID = 0;
 	protected $tiempo;
 	protected $lineaAnterior = "Inicializacion";
 	protected $numeroAnterior = "Inicializacion";
 
-	public function __construct($tiempo, $id=0)
+	public function __construct($tiempo, $id = 0)
 	{
 		$this->tiempo = $tiempo;
 		$this->ID = $id;
@@ -29,12 +29,15 @@ class Tarjeta implements TarjetaInterface {
 	}
 
 	public function recargar($monto) {
-		if (!$this->montoValido($monto))
-			return False;
-		if ($monto == 510.15)
-			$this->saldo += 81.93;
-		if ($monto == 962.59)
-			$this->saldo += 221.58;
+		if (!$this->montoValido($monto)) {
+					return False;
+		}
+		if ($monto == 510.15) {
+					$this->saldo += 81.93;
+		}
+		if ($monto == 962.59) {
+					$this->saldo += 221.58;
+		}
 		$this->saldo += $monto;
 		return True;
 	}
@@ -75,8 +78,9 @@ class Tarjeta implements TarjetaInterface {
 		return ($sabado || $domingo || $noche);
 	}
 	public function checkHora() {
-		if ($this->intervaloTrasbordo())
-			return ($this->tiempo->time() - $this->horaViaje < 5400);
+		if ($this->intervaloTrasbordo()) {
+					return ($this->tiempo->time() - $this->horaViaje < 5400);
+		}
 		return ($this->tiempo->time() - $this->horaViaje < 3600);
 	}
 	
@@ -94,7 +98,7 @@ class Tarjeta implements TarjetaInterface {
 			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))), $this->valorPasaje);
 			$this->NuevoColectivo($colectivo);
 			return True;
-		}else if ($this->plus > 0) {
+		} else if ($this->plus > 0) {
 			$this->plus -= 1;
 			$this->horaViaje = $this->tiempo->time();
 			$this->puedeTrasb = True;
