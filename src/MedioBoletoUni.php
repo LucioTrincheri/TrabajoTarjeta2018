@@ -13,7 +13,7 @@ class MedioBoletoUni extends Tarjeta
 	public function evaluarTrasbordo($colectivo) {
 		if ($this->tiempo->time() - $this->horaViaje >= 300 || $this->nueva == True) {
 			$saldoSuf = (round(($this->valorPasaje / 3), 3) + abs($this->plus - 2) * $this->valorPasaje * 2) < $this->saldo;
-		} else {
+		}else {
 			$saldoSuf = (round(($this->valorPasaje * 2 / 3), 3) + abs($this->plus - 2) * $this->valorPasaje * 2) < $this->saldo;
 		}
 		return ($this->compararBus($colectivo) && $this->checkHora() && $this->puedeTrasb && $saldoSuf);
@@ -23,7 +23,7 @@ class MedioBoletoUni extends Tarjeta
 	public function abonarTrasbordo($colectivo) {
 		if ($this->tiempo->time() - $this->horaViaje >= 300 || $this->nueva == True) {
 			$valor = (round(($this->valorPasaje / 3), 3) + abs($this->plus - 2) * $this->valorPasaje * 2);
-		} else {
+		}else {
 			$valor = (round(($this->valorPasaje * 2 / 3), 3) + abs($this->plus - 2) * $this->valorPasaje * 2);
 		}
 
