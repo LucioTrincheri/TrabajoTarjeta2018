@@ -98,7 +98,7 @@ class Tarjeta implements TarjetaInterface {
 			$this->CalculoAbonoTotal(($this->valorPasaje * (1 + abs($this->plus - 2))), $this->valorPasaje);
 			$this->NuevoColectivo($colectivo);
 			return True;
-		}else if ($this->plus > 0) {
+		} else if ($this->plus > 0) {
 			$this->plus -= 1;
 			$this->horaViaje = $this->tiempo->time();
 			$this->puedeTrasb = True;
