@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<ruleset name="TrabajoTarjeta2018">
-	<description>Code Standard</description>
-	<file>.</file>
-	<rule ref="WordPress">
-</ruleset>
