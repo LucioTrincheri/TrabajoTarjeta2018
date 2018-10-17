@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/LucioTrincheri/TrabajoTarjeta2018.svg?branch=master)](https://travis-ci.org/LucioTrincheri/TrabajoTarjeta2018)
+Travis [![Build Status](https://travis-ci.org/LucioTrincheri/TrabajoTarjeta2018.svg?branch=master)](https://travis-ci.org/LucioTrincheri/TrabajoTarjeta2018)
 
-[![Coverage Status](https://coveralls.io/repos/github/LucioTrincheri/TrabajoTarjeta2018/badge.svg?branch=master&service=github)](https://coveralls.io/github/LucioTrincheri/TrabajoTarjeta2018?branch=master)
+Coveralls [![Coverage Status](https://coveralls.io/repos/github/LucioTrincheri/TrabajoTarjeta2018/badge.svg?branch=master&service=github)](https://coveralls.io/github/LucioTrincheri/TrabajoTarjeta2018?branch=master)
 
+Scrutinizer [![Build Status](https://scrutinizer-ci.com/g/LucioTrincheri/TrabajoTarjeta2018/badges/build.png?b=master)](https://scrutinizer-ci.com/g/LucioTrincheri/TrabajoTarjeta2018/build-status/master)
 Integrantes: Bolzan Francisco y Trincheri Lucio
 
 # Trabajo Tarjeta: Versión 2018
