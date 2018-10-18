@@ -28,39 +28,39 @@ class Boleto implements BoletoInterface {
 		$this->PasjAbonado = $tarjeta->ultPasajeAbonado();
 	}
 
-	public function Fecha() {
+	public function fecha() {
 		return $this->fecha;
 	}
 
-	public function TipoTarjeta() {
+	public function tipo_tarjeta() {
 		return $this->tipoT;
 	}
 
-	public function SaldoTarjeta() {
+	public function saldo_tarjeta() {
 		return $this->saldoT;
 	}
 
-	public function IDTarjeta() {
+	public function id_tarjeta() {
 		return $this->IDT;
 	}
 
-	public function LineaColectivo() {
+	public function linea_colectivo() {
 		return $this->lineaC;
 	}
 
-	public function Abono() {
+	public function abono() {
 		return $this->abono;
 	}
 
-	public function PlusAbonados() {
+	public function plus_abonados() {
 		return $this->plusA;
 	}
 	
-	public function PasajeAbonado() {
+	public function pasaje_abonado() {
 		return $this->PasjAbonado;
 	}
 
-	public function obtenerColectivo() {
+	public function obtener_colectivo() {
 		return $this->colectivo;
 	}
 }

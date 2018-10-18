@@ -8,10 +8,10 @@ class Colectivo implements ColectivoInterface {
 	protected $empresa;
 	protected $numero;
 
-	public function __construct($empresa = NULL, $linea = NULL, $numero = NULL) {
-		$this->empresa = $empresa;
-		$this->linea = $linea;
-		$this->numero = $numero;
+	public function __construct($empresa = null, $linea = null, $numero = null) {
+		$this->empresa	= $empresa;
+		$this->linea	= $linea;
+		$this->numero	= $numero;
 	}
 
 	public function linea() {
@@ -26,9 +26,8 @@ class Colectivo implements ColectivoInterface {
 		return $this->numero;
 	}
 
-	public function pagarCon(TarjetaInterface $tarjeta)
-	{
-		if ($tarjeta->abonarPasaje($this))
+	public function pagar_con(TarjetaInterface $tarjeta) {
+		if ( $tarjeta->abonarPasaje($this) )
 		{
 			$boleto = new Boleto($this, $tarjeta);
 			return $boleto;
