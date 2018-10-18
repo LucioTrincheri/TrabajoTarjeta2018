@@ -4,10 +4,10 @@ namespace TrabajoTarjeta;
 
 class FranquiciaCompleta extends Tarjeta {
 	protected $valorPasaje = 0;
-	protected $tipo = "Franq. C.";
+	protected $tipo = 'Franq. C.';
 	
-	public function abonarPasaje(ColectivoInterface $colectivo) {
+	public function abonar_pasaje(ColectivoInterface $colectivo) {
 		$this->horaViaje = $this->tiempo->time();
-		return True;
+		return true;
 	}
 }

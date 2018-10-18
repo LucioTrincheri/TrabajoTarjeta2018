@@ -59,4 +59,11 @@ interface BoletoInterface {
 	 * @return int
 	 */
 	public function plus_abonados();
+
+	/**
+	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 *
+	 * @return int
+	 */
+	public function pasaje_abonado();
 }
