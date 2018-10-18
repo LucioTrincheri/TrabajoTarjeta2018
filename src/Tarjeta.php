@@ -52,7 +52,7 @@ class Tarjeta implements TarjetaInterface {
 
 //comienzo trasbordo y métodos derivados --------
 	public function abonar_trasbordo($colectivo) {
-		$valor = round(($this->valorPasaje / 3), 3) + abs( $this->plus - 2 ) * $this->valorPasaje;
+		$valor = round( ($this->valorPasaje / 3), 3 ) + abs( $this->plus - 2 ) * $this->valorPasaje;
 		$this->saldo -= $valor;
 		$this->horaViaje = $this->tiempo->time();
 		$this->puedeTrasb = false;
@@ -63,7 +63,7 @@ class Tarjeta implements TarjetaInterface {
 	}
 
 	public function evaluar_trasbordo($colectivo) {
-		$saldoSuf = ( round(($this->valorPasaje / 3), 3) + abs( $this->plus - 2 ) * $this->valorPasaje ) < $this->saldo;
+		$saldoSuf = ( round( ($this->valorPasaje / 3), 3 ) + abs( $this->plus - 2 ) * $this->valorPasaje ) < $this->saldo;
 		return ( $this->comparar_bus( $colectivo ) && $this->check_hora() && $this->puede_trasb && $saldoSuf );
 	}
 	
@@ -72,9 +72,9 @@ class Tarjeta implements TarjetaInterface {
 	}
 	
 	public function intervalo_trasbordo() {
-		$sabado = (date( 'w', $this->tiempo->time() ) == 6 && (date( 'G', $this->tiempo->time() ) >= 14 && date( 'G', $this->tiempo->time()) < 22 ));
-		$domingo = (date( 'w', $this->tiempo->time() ) == 0 && (date( 'G', $this->tiempo->time() ) >= 6 && date( 'G', $this->tiempo->time()) < 22 ));
-		$noche = (date( 'G', $this->tiempo->time() ) >= 22 && date( 'G', $this->tiempo->time() ) < 6);
+		$sabado = date( 'w', $this->tiempo->time() ) == 6 && (date( 'G', $this->tiempo->time() ) >= 14 && date( 'G', $this->tiempo->time() ) < 22);
+		$domingo = date( 'w', $this->tiempo->time() ) == 0 && (date( 'G', $this->tiempo->time() ) >= 6 && date( 'G', $this->tiempo->time() ) < 22);
+		$noche = date( 'G', $this->tiempo->time() ) >= 22 && date( 'G', $this->tiempo->time() ) < 6;
 		return ($sabado || $domingo || $noche);
 	}
 	public function check_hora() {

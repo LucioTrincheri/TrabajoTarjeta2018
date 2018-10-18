@@ -5,65 +5,65 @@ namespace TrabajoTarjeta;
 interface BoletoInterface {
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve el objeto colectivo correspondiente al boleto
 	 *
-	 * @return ColectivoInterface
+	 * @return 
 	 */
 	public function obtener_colectivo();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve la fecha del boleto
 	 *
-	 * @return int
+	 * @return 
 	 */
 	public function fecha();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve el tipo de tarjeta que abono el boleto
 	 *
-	 * @return string
+	 * @return 
 	 */
 	public function tipo_tarjeta();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve el saldo restante de la tarjeta que abono el boleto
 	 *
-	 * @return float
+	 * @return 
 	 */
 	public function saldo_tarjeta();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve la id de la tarjeta que abono el boleto
 	 *
-	 * @return int
+	 * @return 
 	 */
 	public function id_tarjeta();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve la linea del colectivo donde se abono el boleto
 	 *
-	 * @return string
+	 * @return 
 	 */
 	public function linea_colectivo();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve el abono total del boleto
 	 *
-	 * @return float
+	 * @return 
 	 */
 	public function abono();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve la cantidad de plus abonados
 	 *
-	 * @return int
+	 * @return 
 	 */
 	public function plus_abonados();
 
 	/**
-	 * Devuelve un objeto que respresenta el colectivo donde se viajó.
+	 * Devuelve el valor del pasaje
 	 *
-	 * @return int
+	 * @return 
 	 */
 	public function pasaje_abonado();
 }

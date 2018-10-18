@@ -7,7 +7,7 @@ interface TiempoInterface {
 	/**
 	 * Devuelve el tiempo en segundos
 	 *
-	 * @return long
+	 * @return int
 	 */
 	public function time();
 }
