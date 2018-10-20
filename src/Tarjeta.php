@@ -85,6 +85,15 @@ class Tarjeta implements TarjetaInterface {
 	}
 	
 //fin trasbordo y métodos derivados --------- --------- --------- --------- --------- --------- --------- --------- --------- ---------
+
+	public function abonar_plus(ColectivoInterface $colectivo){
+		$this->plus -= 1;
+		$this->horaViaje = $this->tiempo->time();
+		$this->puedeTrasb = true;
+		$this->calculo_abono_total( 0, 0 );
+		$this->nuevo_colectivo( $colectivo );
+		return true;
+	}
 	public function abonar_pasaje(ColectivoInterface $colectivo) {
 		if ( $this->evaluar_trasbordo( $colectivo ) ) {
 			return $this->abonar_trasbordo( $colectivo );
@@ -98,12 +107,7 @@ class Tarjeta implements TarjetaInterface {
 			$this->nuevo_colectivo( $colectivo );
 			return true;
 		} elseif ( $this->plus > 0 ) {
-			$this->plus -= 1;
-			$this->horaViaje = $this->tiempo->time();
-			$this->puedeTrasb = true;
-			$this->calculo_abono_total( 0, 0 );
-			$this->nuevo_colectivo( $colectivo );
-			return true;
+			return $this->abonar_plus( $colectivo );
 		}
 		return false;
 	}
