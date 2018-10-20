@@ -42,8 +42,7 @@ class MedioBoleto extends Tarjeta
 		if ( $this->evaluar_trasbordo( $colectivo ) ) {
 			return $this->abonar_trasbordo( $colectivo );
 		}
-		if ( $this->saldo >= ($this->valorPasaje * (1 + abs( $this->plus - 2 ) * 2)) )
-		{
+		if ( $this->saldo >= ($this->valorPasaje * (1 + abs( $this->plus - 2 ) * 2)) ) {
 			if ( $this->tiempo->time() - $this->horaViaje >= 300 || true === $this->nueva ) {
 				$this->saldo -= ($this->valorPasaje * (1 + abs( $this->plus - 2 ) * 2));
 				$this->horaViaje = $this->tiempo->time();
@@ -53,7 +52,6 @@ class MedioBoleto extends Tarjeta
 				$this->nuevo_colectivo( $colectivo );
 				return true;
 			}
-			
 			if ( $this->saldo >= ($this->valorPasaje * (2 + abs( $this->plus - 2 ) * 2)) ) {
 				$this->saldo -= ($this->valorPasaje * (2 + abs( $this->plus - 2 ) * 2));
 				$this->plus = 2;

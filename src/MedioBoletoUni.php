@@ -8,8 +8,7 @@ class MedioBoletoUni extends MedioBoleto
 	protected $tipo = 'Medio U.';
 
 	public function abonar_pasaje(ColectivoInterface $colectivo) {
-		if ( $this->saldo >= ($this->valorPasaje * (1 + abs( $this->plus - 2 ) * 2)) )
-		{
+		if ( $this->saldo >= ($this->valorPasaje * (1 + abs( $this->plus - 2 ) * 2)) ) {
 			if ( $this->tiempo->time() - $this->horaViaje >= 300 || true === $this->nueva ) {
 				if ( $this->mediosRestantes > 0 ) {
 					$this->mediosRestantes -= 1;
