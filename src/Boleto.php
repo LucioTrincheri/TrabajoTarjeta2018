@@ -18,14 +18,14 @@ class Boleto implements BoletoInterface {
 	public function __construct($colectivo, $tarjeta) {
 		$this->colectivo = $colectivo;
 		$this->tarjeta = $tarjeta;
-		$this->fecha = $tarjeta->getHora();
-		$this->tipoT = $tarjeta->tipoTarjeta();
-		$this->saldoT = $tarjeta->obtenerSaldo();
-		$this->IDT = $tarjeta->getID();
+		$this->fecha = $tarjeta->get_hora();
+		$this->tipoT = $tarjeta->tipo_tarjeta();
+		$this->saldoT = $tarjeta->obtener_saldo();
+		$this->IDT = $tarjeta->get_id();
 		$this->lineaC = $colectivo->linea();
-		$this->abono = $tarjeta->ultAbono();
-		$this->plusA = $tarjeta->ultCantPlus();
-		$this->PasjAbonado = $tarjeta->ultPasajeAbonado();
+		$this->abono = $tarjeta->ult_abono();
+		$this->plusA = $tarjeta->ult_cant_plus();
+		$this->PasjAbonado = $tarjeta->ult_pasaje_abonado();
 	}
 
 	public function fecha() {
