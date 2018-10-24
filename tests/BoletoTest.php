@@ -11,13 +11,13 @@ class BoletoTest extends TestCase {
 	*/
 
     public function testSaldoCero() {
-        $valor = 14.80;
+		$valor = 14.80;
 		$colectivo = new Colectivo(NULL, NULL, NULL);
 		$tiempoReal = new Tiempo;
 		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(20);
-        $boleto = new Boleto($colectivo, $tarjeta);
-        $this->assertEquals($boleto->Abono(), 0);
+		$boleto = new Boleto($colectivo, $tarjeta);
+		$this->assertEquals($boleto->abono(), 0);
     }
 
 	public function testViajeSimple() {
@@ -27,7 +27,7 @@ class BoletoTest extends TestCase {
 		$tarjeta->recargar(20);
 		$valor = 14.80;
         $boleto = new Boleto($colectivo, $tarjeta);
-		$this->assertEquals($boleto->obtenerColectivo(), $colectivo);
+		$this->assertEquals($boleto->obtener_Colectivo(), $colectivo);
 	}
 
 	public function testNuevosAtributos(){
@@ -35,14 +35,14 @@ class BoletoTest extends TestCase {
 		$tiempoReal = new Tiempo;
 		$tarjeta = new Tarjeta($tiempoReal);
 		$tarjeta->recargar(20);
-		$boleto = $colectivo->pagarCon($tarjeta);
-		$this->assertEquals($boleto->Fecha(), $tiempoReal->time());
-		$this->assertEquals($boleto->TipoTarjeta(), "Movi");
-		$this->assertEquals($boleto->SaldoTarjeta(), 5.2);
-		$this->assertEquals($boleto->IDTarjeta(), 0);
-		$this->assertEquals($boleto->LineaColectivo(), "142 Verde");
-		$this->assertEquals($boleto->Abono(), 14.8);
-		$this->assertEquals($boleto->PasajeAbonado(), 14.8);
-		$this->assertEquals($boleto->PlusAbonados(), 0);
+		$boleto = $colectivo->pagar_con($tarjeta);
+		$this->assertEquals($boleto->fecha(), $tiempoReal->time());
+		$this->assertEquals($boleto->tipo_tarjeta(), "Movi");
+		$this->assertEquals($boleto->saldo_tarjeta(), 5.2);
+		$this->assertEquals($boleto->id_tarjeta(), 0);
+		$this->assertEquals($boleto->linea_colectivo(), "142 Verde");
+		$this->assertEquals($boleto->abono(), 14.8);
+		$this->assertEquals($boleto->pasaje_Abonado(), 14.8);
+		$this->assertEquals($boleto->plus_abonados(), 0);
 	}
 }
