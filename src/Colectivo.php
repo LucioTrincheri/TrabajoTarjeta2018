@@ -26,7 +26,7 @@ class Colectivo implements ColectivoInterface {
 		return $this->numero;
 	}
 
-	public function pagar_con($tarjeta) {
+	public function pagar_con(TarjetaInterface $tarjeta) {
 		if ( $tarjeta->abonar_pasaje( $this ) ) {
 			$boleto = new Boleto( $this, $tarjeta );
 			return $boleto;
