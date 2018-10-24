@@ -13,7 +13,7 @@ interface TarjetaInterface {
 	 *   Devuelve TRUE si el monto a cargar es válido, o FALSE en caso de que no
 	 *   sea valido.
 	 */
-	public function recargar($monto);
+	public function recargar(float $monto);
 
 	/**
 	 * Devuelve el saldo que le queda a la tarjeta.
@@ -49,7 +49,7 @@ interface TarjetaInterface {
 	 *   Devuelve TRUE si el monto a cargar es válido, o FALSE en caso de que no
 	 *   sea valido.
 	 */
-	public function monto_valido($monto);
+	public function monto_valido(float $monto);
 
 	/**
 	 * Abona el trasbordo (1/3 del boleto).
@@ -114,11 +114,11 @@ interface TarjetaInterface {
 	/**
 	 * Calcula la el monto y la cantidad de plus abonados
 	 *
-	 * @param float $total float $valor
+	 * @param float $total, float $valor
 	 *
 	 * @return null
 	 */
-	public function calculo_abono_total($total, $valor);
+	public function calculo_abono_total(float $total, float $valor);
 
 	/**
 	 * Devuelve el ultimo abono

@@ -64,7 +64,7 @@ class Tarjeta implements TarjetaInterface {
 
 	public function evaluar_trasbordo($colectivo) {
 		$saldoSuf = ( round( ($this->valorPasaje / 3), 3 ) + abs( $this->plus - 2 ) * $this->valorPasaje ) < $this->saldo;
-		return ( $this->comparar_bus( $colectivo ) && $this->check_hora() && $this->puede_trasb && $saldoSuf );
+		return ( $this->comparar_bus( $colectivo ) && $this->check_hora() && $this->puedeTrasb && $saldoSuf );
 	}
 	
 	public function comparar_bus($colectivo) {	
