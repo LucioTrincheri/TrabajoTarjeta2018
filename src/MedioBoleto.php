@@ -8,7 +8,7 @@ class MedioBoleto extends Tarjeta
 	protected $nueva = true;
 	protected $tipo = 'Medio';
 
-	public function evaluar_trasbordo($colectivo) {
+	public function evaluar_trasbordo(ColectivoInterface $colectivo) {
 		if ( $this->tiempo->time() - $this->horaViaje >= 300 || true === $this->nueva ) {
 			$saldoSuf = (round( ($this->valorPasaje / 3), 3 ) + abs( $this->plus - 2 ) * $this->valorPasaje * 2) < $this->saldo;
 		} else {
@@ -17,7 +17,7 @@ class MedioBoleto extends Tarjeta
 		return ( $this->comparar_bus( $colectivo ) && $this->check_hora() && $this->puedeTrasb && $saldoSuf );
 	}
 
-	public function abonar_trasbordo($colectivo) {
+	public function abonar_trasbordo(ColectivoInterface $colectivo) {
 		if ( $this->tiempo->time() - $this->horaViaje >= 300 || true === $this->nueva ) {
 			$valor = (round( ($this->valorPasaje / 3), 3 ) + abs( $this->plus - 2 ) * $this->valorPasaje * 2);
 		} else {

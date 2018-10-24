@@ -24,11 +24,11 @@ class Tarjeta implements TarjetaInterface {
 		$this->IDT = $id;
 	}
 	
-	public function monto_valido($monto) {
+	public function monto_valido(float $monto) {
 		return in_array( $monto, [10, 20, 30, 50, 100, 510.15, 962.59] );
 	}
 
-	public function recargar($monto) {
+	public function recargar(float $monto) {
 		if ( ! $this->monto_valido( $monto ) ) {
 			return false;
 		}
@@ -51,7 +51,7 @@ class Tarjeta implements TarjetaInterface {
 	}
 
 //comienzo trasbordo y métodos derivados --------
-	public function abonar_trasbordo($colectivo) {
+	public function abonar_trasbordo(ColectivoInterface $colectivo) {
 		$valor = round( ($this->valorPasaje / 3), 3 ) + abs( $this->plus - 2 ) * $this->valorPasaje;
 		$this->saldo -= $valor;
 		$this->horaViaje = $this->tiempo->time();
@@ -62,12 +62,12 @@ class Tarjeta implements TarjetaInterface {
 		return true;
 	}
 
-	public function evaluar_trasbordo($colectivo) {
+	public function evaluar_trasbordo(ColectivoInterface $colectivo) {
 		$saldoSuf = ( round( ($this->valorPasaje / 3), 3 ) + abs( $this->plus - 2 ) * $this->valorPasaje ) < $this->saldo;
 		return ( $this->comparar_bus( $colectivo ) && $this->check_hora() && $this->puedeTrasb && $saldoSuf );
 	}
 	
-	public function comparar_bus($colectivo) {	
+	public function comparar_bus(ColectivoInterface $colectivo) {	
 		return (($this->lineaAnterior != $colectivo->linea()) || ($this->numeroAnterior != $colectivo->numero()));
 	}
 	
@@ -120,7 +120,7 @@ class Tarjeta implements TarjetaInterface {
 		return $this->tipo;
 	}
 	
-	public function calculo_abono_total($total, $valor) {
+	public function calculo_abono_total(float $total, float $valor) {
 		if ( 0 == $total ) {
 			$this->ultimoAbono = 0;
 			$this->ultViajePlus = 1;
@@ -151,7 +151,7 @@ class Tarjeta implements TarjetaInterface {
 		return $this->horaViaje;
 	}
 
-	public function nuevo_colectivo($colectivo) {
+	public function nuevo_colectivo(ColectivoInterface $colectivo) {
 		$this->lineaAnterior = $colectivo->linea();
 		$this->numeroAnterior = $colectivo->numero();
 	}
