@@ -163,8 +163,11 @@ class FranquiciasTest extends TestCase {
 		$colectivo2 = new Colectivo("Semtur","Amarillo",145);
 		$this->assertTrue($colectivo2->pagar_con($tarjeta) instanceof Boleto);
 		$this->assertEquals($tarjeta->obtener_saldo(), 40.133); //2do medio + trasbordo
-		$tiempoFalso -> avanzar(2500);
+		$tiempoFalso -> avanzar(600);
 		$this->assertTrue($colectivo1->pagar_con($tarjeta) instanceof Boleto);
-		$this->assertEquals($tarjeta->obtener_saldo(), 37.666); //medio + trasbordo al pasar de dia
+		$this->assertEquals($tarjeta->obtener_saldo(), 25.333); //normal
+		$tiempoFalso -> avanzar(1900);
+		$this->assertTrue($colectivo2->pagar_con($tarjeta) instanceof Boleto);
+		$this->assertEquals($tarjeta->obtener_saldo(), 22.866); //paso dia + trasbordo + medio
 	}
 }
