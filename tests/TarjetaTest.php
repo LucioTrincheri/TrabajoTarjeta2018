@@ -96,4 +96,19 @@ class TarjetaTest extends TestCase {
 		$colectivo2->pagar_con($tarjeta);
 		$this->assertEquals($tarjeta->obtener_saldo(), 30.267);
 	}
+	
+	public function testTiempoNoventaMin(){
+		$tiempo = new TiempoFalso;
+		$tarjeta = new Tarjeta($tiempo);
+		$tiempo->avanzar(1538245793); //Sabado 2/10/2018 a las 18:29:53
+		$tarjeta->recargar(50);
+		$colectivo1 = new Colectivo("Semtur","Azul","102");
+		$colectivo2 = new Colectivo("Semtur","Amarillo","145");
+		$colectivo1->pagar_con($tarjeta);
+		$this->assertEquals($tarjeta->obtener_saldo(), 35.2);
+		$tiempo->avanzar(3000);//Adelanto 3000 seg para trasbordo
+		$this->assertTrue($tarjeta->check_hora());
+		$colectivo2->pagar_con($tarjeta);
+		$this->assertEquals($tarjeta->obtener_saldo(), 30.267);
+	}
 }
