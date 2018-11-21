@@ -84,7 +84,7 @@ class TarjetaTest extends TestCase {
 		$this->assertTrue($colectivo2->pagar_con($tarjeta) instanceof Boleto);
 		$this->assertEquals($tarjeta->obtener_saldo(), 30.267); //Trasbordo
 		$tiempoFalso -> avanzar(600);
-		$this->assertTrue($colectivo->pagar_con($tarjeta) instanceof Boleto);
+		$this->assertTrue($colectivo1->pagar_con($tarjeta) instanceof Boleto);
 		$this->assertEquals($tarjeta->obtener_saldo(), 15.467); //No es trasbordo ya que el ultimo lo fue
 	}
 
