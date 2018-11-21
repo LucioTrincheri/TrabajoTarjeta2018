@@ -76,14 +76,15 @@ class FranquiciasTest extends TestCase {
 		$colectivo = new Colectivo();
 		$tarjeta->recargar(50);
 		$this->assertTrue($tarjeta->abonar_pasaje($colectivo));
-		$this->assertEquals($tarjeta->obtener_saldo(), 42.6);
+		$this->assertEquals($tarjeta->obtener_saldo(), 42.6); //Primer medio del dia
 		$this->assertTrue($tarjeta->abonar_pasaje($colectivo));
-		$this->assertEquals($tarjeta->obtener_saldo(), 27.8);
+		$this->assertEquals($tarjeta->obtener_saldo(), 27.8); //Si no avanzo el tiempo no puedo usar otro medio
 		$tiempoFalso -> avanzar(500);
 		$this->assertTrue($tarjeta->abonar_pasaje($colectivo));
-		$this->assertEquals($tarjeta->obtener_saldo(), 20.4);
+		$this->assertEquals($tarjeta->obtener_saldo(), 20.4); //Al avanzar 500 segundos puedo utilizar el 2do medio del dia
+		$tiempoFalso -> avanzar(500);
 		$this->assertTrue($tarjeta->abonar_pasaje($colectivo));
-		$this->assertEquals($tarjeta->obtener_saldo(), 5.6);
+		$this->assertEquals($tarjeta->obtener_saldo(), 5.6); //Aun avanzando otros 500 segundos no poseeo mas medios
 	}
 
 	public function testInteraccionPlusHorarios(){
