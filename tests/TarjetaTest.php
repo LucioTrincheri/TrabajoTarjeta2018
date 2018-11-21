@@ -56,6 +56,9 @@ class TarjetaTest extends TestCase {
 		$tarjeta->abonar_pasaje($colectivo);
 		$this->assertEquals($tarjeta->valor_del_pasaje(),14.8);
 		$this->assertEquals($tarjeta->obtener_saldo(), 5.2);
+		$tarjeta->abonar_pasaje($colectivo); //Primer Viaje plus
+		$tarjeta->abonar_pasaje($colectivo); //Segundo Viaje plus
+		$this->assertFalse($tarjeta->abonar_pasaje($colectivo)); //Compruebo que no se puede viajar sin saldo
 	}
 
 	public function testRecargaPlus() {
