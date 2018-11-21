@@ -78,11 +78,14 @@ class TarjetaTest extends TestCase {
 		$tarjeta->recargar(50);
 		$colectivo1 = new Colectivo("Semtur","Azul","102");
 		$this->assertTrue($colectivo1->pagar_con($tarjeta) instanceof Boleto);
-		$this->assertEquals($tarjeta->obtener_saldo(), 35.2);
+		$this->assertEquals($tarjeta->obtener_saldo(), 35.2); //Viaje normal
 		$tiempoFalso -> avanzar(600);
 		$colectivo2 = new Colectivo("Semtur","Amarillo","145");
 		$this->assertTrue($colectivo2->pagar_con($tarjeta) instanceof Boleto);
-		$this->assertEquals($tarjeta->obtener_saldo(), 30.267);
+		$this->assertEquals($tarjeta->obtener_saldo(), 30.267); //Trasbordo
+		$tiempoFalso -> avanzar(600);
+		$this->assertTrue($colectivo->pagar_con($tarjeta) instanceof Boleto);
+		$this->assertEquals($tarjeta->obtener_saldo(), 15.467); //No es trasbordo ya que el ultimo lo fue
 	}
 
 	public function testTiempoSesentaMin(){
